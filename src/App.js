@@ -18,8 +18,8 @@ function App() {
         Glass
       </object>
       <Switch>
-        <Route path="/foods" component={ Foods } />
         <Route exact path="/" component={ Login } />
+        <Route exact path="/foods" component={ Foods } />
       </Switch>
     </div>
   );
