@@ -35,5 +35,5 @@ describe('Teste o componente <Login.js />', () => {
 
   userEvent.click(buttonLogin);
 
- expect(history.location.pathname).toBe('/foods');
+  expect(history.location.pathname).toBe('/foods');
 });
