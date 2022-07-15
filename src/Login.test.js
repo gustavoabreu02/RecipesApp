@@ -7,7 +7,7 @@ import renderWithRouter from './renderWithRouter';
 
 describe('Teste o componente <Login.js />', () => {
   test('Testa todos os elementos que devem respeitar os atributos descritos', () => {
-    const history = renderWithRouter(<App />);
+    renderWithRouter(<App />);
     const emailInput = screen.getByTestId('email-input');
     const passwordinput = screen.getByTestId('password-input');
     const buttonLogin = screen.getByRole('button', { name: /enter/i });
@@ -35,5 +35,5 @@ describe('Teste o componente <Login.js />', () => {
 
   userEvent.click(buttonLogin);
 
-  expect(history.location.pathname).toBe('/foods');
+ expect(history.location.pathname).toBe('/foods');
 });

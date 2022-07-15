@@ -1,5 +1,5 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import { getUserEmail } from '../actions';
@@ -10,7 +10,7 @@ const INICIAL_STATE = {
   password: '',
 };
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     state = INICIAL_STATE
 
     handleChange = ({ target }) => {
@@ -27,8 +27,11 @@ export default class Login extends React.Component {
       }
     }
 
-    handleClick = async(event) => {
+    handleClick = (event) => {
       event.preventDefault();
+      const { user } = this.props;
+      const { email } = this.state;
+      user(email);
     }
 
     render() {
@@ -76,16 +79,16 @@ export default class Login extends React.Component {
     }
 }
 
-/* const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   user: (email) => dispatch(getUserEmail(email)),
-}); */
+});
 
 Login.propTypes = {
-  //  user: PropTypes.func.isRequired,
+  user: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 
 };
 
-// export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
