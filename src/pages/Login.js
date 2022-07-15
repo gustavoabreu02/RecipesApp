@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+/* import { Link } from 'react-router-dom'; */
+import { getUserEmail } from '../redux/Actions/actions';
 // import { getUserEmail } from '../actions';
 
 const INICIAL_STATE = {
@@ -27,11 +28,16 @@ class Login extends React.Component {
       }
     }
 
-    handleClick = (event) => {
-      event.preventDefault();
-      const { user } = this.props;
+    handleClick = () => {
+      /* event.preventDefault(); */
+      const { dispatch, history } = this.props;
+      console.log(this.props);
       const { email } = this.state;
-      user(email);
+      dispatch(getUserEmail(email));
+      localStorage.setItem('user', JSON.stringify({ email }));
+      localStorage.setItem('mealsToken', 1);
+      localStorage.setItem('cocktailsToken', 1);
+      history.push('/foods');
     }
 
     render() {
@@ -61,34 +67,34 @@ class Login extends React.Component {
                 onChange={ this.handleChange }
               />
             </label>
-            <Link to="/foods">
-              <button
-                id="login-submit-btn"
-                type="submit"
-                name="login-submit-btn"
-                data-testid="login-submit-btn"
-                disabled={ isSaveButtonDisabled }
-                onChange={ this.handleClick }
-              >
-                Enter
-              </button>
-            </Link>
+            {/* <Link to="/foods"> */}
+            <button
+              id="login-submit-btn"
+              type="button"
+              name="login-submit-btn"
+              data-testid="login-submit-btn"
+              disabled={ isSaveButtonDisabled }
+              onClick={ this.handleClick }
+            >
+              Enter
+            </button>
+            {/* </Link> */}
           </fieldset>
         </form>
       );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+/* const mapDispatchToProps = (dispatch) => ({
   user: (email) => dispatch(getUserEmail(email)),
-});
+}); */
 
 Login.propTypes = {
-  user: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null)(Login);
