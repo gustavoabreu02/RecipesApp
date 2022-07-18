@@ -28,8 +28,8 @@ class Login extends React.Component {
       }
     }
 
-    handleClick = () => {
-      /* event.preventDefault(); */
+    handleClick = (event) => {
+      event.preventDefault();
       const { dispatch, history } = this.props;
       console.log(this.props);
       const { email } = this.state;
