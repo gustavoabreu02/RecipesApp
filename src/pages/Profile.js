@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
+import Header from '../components/HeaderProfile';
+import Footer from '../components/Footer';
 
 class Profile extends React.Component {
   constructor() {
@@ -42,6 +43,7 @@ class Profile extends React.Component {
           Logout
 
         </button>
+        <Footer />
       </div>
     );
   }
