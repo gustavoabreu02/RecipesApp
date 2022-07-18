@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from '../components/HeaderProfile';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 class Profile extends React.Component {
@@ -19,7 +19,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header title="Profile" />
         <span data-testid="profile-email">
           { JSON.parse(localStorage.getItem('user')).email }
         </span>
@@ -32,7 +32,6 @@ class Profile extends React.Component {
             type="button"
           >
             Favorite Recipes
-
           </button>
         </Link>
         <button
@@ -53,7 +52,6 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-
 };
 
 export default Profile;

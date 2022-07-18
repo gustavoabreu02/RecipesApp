@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-export default class Foods extends React.Component {
+export default class Drinks extends React.Component {
   render() {
     return (
-      <Header title="Foods" showIcon="true" />
+      <Header title="Drinks" showIcon="true" />
     );
   }
 }
