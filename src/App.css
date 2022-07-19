@@ -12,7 +12,7 @@
 
 .rocksGlass {
   animation: shake 1s infinite ease;
-  max-height: 80vh;
+  max-height: 40vh;
 }
 
 /*
@@ -65,4 +65,9 @@
   100% {
     transform: rotate(-10deg);
   }
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
 }
