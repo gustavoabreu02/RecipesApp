@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 
 class Profile extends React.Component {
   constructor() {
@@ -21,7 +21,7 @@ class Profile extends React.Component {
       <div>
         <Header title="Profile" />
         <span data-testid="profile-email">
-          { JSON.parse(localStorage.getItem('user')).email }
+          { JSON.parse(localStorage.getItem('user'))?.email || ''}
         </span>
         <Link to="/done-recipes">
           <button data-testid="profile-done-btn" type="button">Done Recipes</button>
@@ -42,7 +42,7 @@ class Profile extends React.Component {
           Logout
 
         </button>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

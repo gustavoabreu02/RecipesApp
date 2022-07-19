@@ -18,18 +18,23 @@ function App() {
     <div className="meals">
       <span className="logo">TRYBE</span>
       <Switch>
-        <Route path="/foods" component={ Foods } />
-        <Route path="/foods/{id-da-receita}" component={ FoodsRecipe } />
-        <Route path="/foods/{id-da-receita}/in-progress" component={ FoodsInProgress } />
-        <Route path="/drinks" component={ Drinks } />
-        <Route path="/drinks/{id-da-receita}" component={ DrinksRecipe } />
+        <Route exact path="/foods" component={ Foods } />
+        <Route exact path="/foods/id-da-receita" component={ FoodsRecipe } />
         <Route
-          path="/drinks/{id-da-receita}/in-progress"
+          exact
+          path="/foods/id-da-receita/in-progress"
+          component={ FoodsInProgress }
+        />
+        <Route exact path="/drinks" component={ Drinks } />
+        <Route exact path="/drinks/id-da-receita" component={ DrinksRecipe } />
+        <Route
+          exact
+          path="/drinks/id-da-receita/in-progress"
           component={ DrinksInProgress }
         />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/done-recipes" component={ DoneRecipes } />
-        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/done-recipes" component={ DoneRecipes } />
+        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </div>
