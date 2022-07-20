@@ -67,7 +67,7 @@ class Header extends React.Component {
               onChange={ this.handleChange }
               name="searchValue"
             />
-            <SearchBar />
+            <SearchBar { ...this.props } />
           </div>
         )}
       </header>
