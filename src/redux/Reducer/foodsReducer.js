@@ -1,10 +1,12 @@
 import { ERROR_REQUEST, FIRST_LETTER, ADD_INGREDIENT,
-  ADD_BYNAME } from '../Actions/actions';
+  ADD_BYNAME,
+  ADD_SEARCH_VALUE } from '../Actions/actions';
 
 const INITIAL_STATE = {
   ingredient: '',
   name: '',
-  firstLetter: '',
+  firstLetter: [],
+  searchValue: '',
 };
 
 const foodsReducer = (state = INITIAL_STATE, action) => {
@@ -21,9 +23,11 @@ const foodsReducer = (state = INITIAL_STATE, action) => {
   case ERROR_REQUEST:
     return { ...state, name: action.error,
     };
+  case ADD_SEARCH_VALUE:
+    return { ...state, searchValue: action.searchValue,
+    };
   default:
     return state;
   }
 };
-
 export default foodsReducer;
