@@ -4,7 +4,16 @@ import RecipeDetails from '../components/RecipeDetails';
 class FoodsRecipe extends React.Component {
   render() {
     return (
-      <RecipeDetails />
+      <>
+        <RecipeDetails />
+        <button
+          className="startRecipeBtn"
+          data-testid="start-recipe-btn"
+          type="button"
+        >
+          Start Recipe
+        </button>
+      </>
     );
   }
 }

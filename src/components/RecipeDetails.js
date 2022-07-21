@@ -7,6 +7,7 @@ export default class RecipeDetails extends React.Component {
   }
 
   render() {
+    /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultei conforme indicado no Readme */
     const opts = {
       height: '390',
       width: '640',
@@ -30,7 +31,8 @@ export default class RecipeDetails extends React.Component {
             <li>virá a lógica para colocar os ingredientes em lista buscando da api</li>
           </ul>
           <p data-testid="instructions">texto da api</p>
-          {/* Youtube será encapsulado por ternário só tem em foods */}
+          {/** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultei conforme indicado no Readme */}
+          {/* Youtube será encapsulado por ternário só tem em foods, manter o comentário de cima */}
           <YouTube
             data-testid="video"
             videoId="" /* puxar video da api de acordo com lógica */
