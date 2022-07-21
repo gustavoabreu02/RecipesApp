@@ -42,7 +42,7 @@ class Profile extends React.Component {
           Logout
 
         </button>
-        <Footer />
+        <Footer { ...this.props } />
       </div>
     );
   }
