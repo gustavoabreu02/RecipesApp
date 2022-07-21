@@ -15,11 +15,15 @@ class Foods extends React.Component {
     } = this.props;
     const number = 11;
     return (
-      <div style={ { width: '100%' } }>
+      <div className="foodMain">
         <Header title="Foods" showIcon="true" { ...this.props } />
         <div className="card">
           { foodsIngredients.filter((recipe, i) => i <= number).map((recipe, index) => (
-            <div data-testid={ `${index}-recipe-card` } key={ recipe.idMeal }>
+            <div
+              className="cardRow"
+              data-testid={ `${index}-recipe-card` }
+              key={ recipe.idMeal }
+            >
               <img
                 src={ recipe.strMealThumb }
                 alt={ recipe.strMeal }
@@ -31,7 +35,11 @@ class Foods extends React.Component {
             </div>
           )) }
           { foodsName.filter((recipe, i) => i <= number).map((recipe, index) => (
-            <div data-testid={ `${index}-recipe-card` } key={ recipe.idMeal }>
+            <div
+              className="cardRow"
+              data-testid={ `${index}-recipe-card` }
+              key={ recipe.idMeal }
+            >
               <img src={ recipe.strMealThumb } alt={ recipe.strMeal } />
               <span data-testid={ `${index}-card-name` }>
                 { recipe.strMeal }
@@ -39,7 +47,11 @@ class Foods extends React.Component {
             </div>
           )) }
           { foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, inde) => (
-            <div data-testid={ `${inde}-recipe-card` } key={ recipe.idMeal }>
+            <div
+              className="cardRow"
+              data-testid={ `${inde}-recipe-card` }
+              key={ recipe.idMeal }
+            >
               <img
                 src={ recipe.strMealThumb }
                 alt={ recipe.strMeal }
@@ -51,7 +63,11 @@ class Foods extends React.Component {
             </div>
           )) }
           { nameDrink.filter((recipe, i) => i <= number).map((recipe, indi) => (
-            <div data-testid={ `${indi}-recipe-card` } key={ recipe.idDrink }>
+            <div
+              className="cardRow"
+              data-testid={ `${indi}-recipe-card` }
+              key={ recipe.idDrink }
+            >
               <img
                 src={ recipe.strDrinkThumb }
                 alt={ recipe.strDrink }
@@ -63,7 +79,11 @@ class Foods extends React.Component {
             </div>
           )) }
           { firstLetterDrinks.filter((recipe, i) => i <= number).map((recipe, ind) => (
-            <div data-testid={ `${ind}-recipe-card` } key={ recipe.idDrink }>
+            <div
+              className="cardRow"
+              data-testid={ `${ind}-recipe-card` }
+              key={ recipe.idDrink }
+            >
               <img
                 src={ recipe.strDrinkThumb }
                 alt={ recipe.strDrink }
@@ -75,7 +95,11 @@ class Foods extends React.Component {
             </div>
           )) }
           { drinkIngredient.filter((recipe, i) => i <= number).map((recipe, indc) => (
-            <div data-testid={ `${indc}-recipe-card` } key={ recipe.idDrink }>
+            <div
+              className="cardRow"
+              data-testid={ `${indc}-recipe-card` }
+              key={ recipe.idDrink }
+            >
               <img
                 src={ recipe.strDrinkThumb }
                 alt={ recipe.strDrink }
