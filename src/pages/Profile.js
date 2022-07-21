@@ -40,7 +40,6 @@ class Profile extends React.Component {
           onClick={ this.handleClick }
         >
           Logout
-
         </button>
         <Footer { ...this.props } />
       </div>

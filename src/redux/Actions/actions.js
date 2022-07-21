@@ -18,7 +18,6 @@ export const getFoodByLetter = (first) => ({ type: FIRST_LETTER, first });
 export const getFoodByIngredient = (ingredient) => ({ type: ADD_INGREDIENT, ingredient });
 export const getFoodByName = (name) => ({ type: ADD_BYNAME, name });
 export const getSearchValue = (searchValue) => ({ type: ADD_SEARCH_VALUE, searchValue });
-
 export const getDrinkByIngredient = (ingredient) => ({ type: SEARCH_INGREDIENT,
   ingredient });
 export const getDrinkByName = (name) => ({ type: SEARCH_NAME, name });

@@ -72,6 +72,11 @@ footer {
   position: fixed;
 }
 
+.startRecipeBtn {
+  bottom: 0;
+  position: fixed;
+}
+
 .card {
   display: flex;
   align-items: center;
@@ -83,15 +88,15 @@ footer {
 
 }
 
-.card img {
-  width: 50px;
-}
-
 .cardRow {
   display: flex;
   width: 33%;
   background-color: yellow;
   
+}
+
+.card img {
+  width: 50px;
 }
 
 .foodMain {

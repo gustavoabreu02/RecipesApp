@@ -15,6 +15,7 @@ class Foods extends React.Component {
     } = this.props;
     const number = 11;
     return (
+
       <div className="foodMain">
         <Header title="Foods" showIcon="true" { ...this.props } />
         <div className="card">
@@ -116,6 +117,7 @@ class Foods extends React.Component {
     );
   }
 }
+
 
 Foods.propTypes = {
   foodsIngredients: PropTypes.instanceOf(Object).isRequired,

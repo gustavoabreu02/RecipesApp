@@ -86,6 +86,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { foodsIngredients, foodsName, foodsFirstLetter } = this.props;
     return (
       <div className="container-search-bar">
         <label htmlFor="ingredient">
@@ -123,6 +124,7 @@ class SearchBar extends React.Component {
           type="button"
           onClick={ () => {
             const { idFilter } = this.state;
+
             const { searchValue, page } = this.props;
             if (idFilter === 'ingredient' && page === 'foods') {
               this.getFoodByIngredients(searchValue);
@@ -141,6 +143,40 @@ class SearchBar extends React.Component {
         >
           Search
         </button>
+        { foodsIngredients.map((receita, index) => (
+          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
+            <img
+              src={ receita.strMealThumb }
+              alt={ receita.strMeal }
+              data-testid={ `${index}-card-img ` }
+            />
+            <span data-testid={ `${index}-card-name` }>
+              { receita.strMeal }
+              {' '}
+            </span>
+          </div>
+        )) }
+        { foodsName.map((receita, index) => (
+          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
+            <img src={ receita.strMealThumb } alt={ receita.strMeal } />
+            <span data-testid={ `${index}-card-name` }>
+              { receita.strMeal }
+              {' '}
+            </span>
+          </div>
+        )) }
+        { foodsFirstLetter.map((receita, index) => (
+          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
+            <img
+              src={ receita.strMealThumb }
+              alt={ receita.strMeal }
+              data-testid={ `${index}-card-img ` }
+            />
+            <span data-testid={ `${index}-card-name` }>
+              { receita.strMeal }
+            </span>
+          </div>
+        )) }
       </div>
     );
   }
@@ -154,6 +190,21 @@ SearchBar.propTypes = {
 const mapStateToProps = (state) => ({
   searchValue: state.foodsReducer.searchValue,
   page: state.foodsReducer.page,
+});
+
+SearchBar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
+  foodsIngredients: PropTypes.instanceOf(Object).isRequired,
+  foodsName: PropTypes.instanceOf(Object).isRequired,
+  foodsFirstLetter: PropTypes.instanceOf(Object).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  searchValue: state.foodsReducer.searchValue,
+  foodsIngredients: state.foodsReducer.ingredient.meals,
+  foodsName: state.foodsReducer.name.meals,
+  foodsFirstLetter: state.foodsReducer.firstLetter.meals,
 });
 
 export default connect(mapStateToProps)(SearchBar);
