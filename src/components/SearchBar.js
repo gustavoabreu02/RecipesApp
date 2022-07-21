@@ -124,7 +124,6 @@ class SearchBar extends React.Component {
           type="button"
           onClick={ () => {
             const { idFilter } = this.state;
-
             const { searchValue, page } = this.props;
             if (idFilter === 'ingredient' && page === 'foods') {
               this.getFoodByIngredients(searchValue);
@@ -181,20 +180,11 @@ class SearchBar extends React.Component {
     );
   }
 }
+
 SearchBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  searchValue: state.foodsReducer.searchValue,
-  page: state.foodsReducer.page,
-});
-
-SearchBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  searchValue: PropTypes.string.isRequired,
   foodsIngredients: PropTypes.instanceOf(Object).isRequired,
   foodsName: PropTypes.instanceOf(Object).isRequired,
   foodsFirstLetter: PropTypes.instanceOf(Object).isRequired,
@@ -202,6 +192,7 @@ SearchBar.propTypes = {
 
 const mapStateToProps = (state) => ({
   searchValue: state.foodsReducer.searchValue,
+  page: state.foodsReducer.page,
   foodsIngredients: state.foodsReducer.ingredient.meals,
   foodsName: state.foodsReducer.name.meals,
   foodsFirstLetter: state.foodsReducer.firstLetter.meals,
