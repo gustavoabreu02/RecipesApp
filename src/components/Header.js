@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import { getSearchValue } from '../redux/Actions/actions';
 
 class Header extends React.Component {
   state = {
     showSearch: false,
+    searchValue: '',
   }
 
   showInput = () => {
@@ -15,9 +18,20 @@ class Header extends React.Component {
     this.setState({ showSearch: !showSearch });
   }
 
+  handleChange = ({ target }) => {
+    const { value, name } = target;
+    const { dispatch } = this.props;
+    this.setState({
+      [name]: value,
+    }, () => {
+      const { searchValue } = this.state;
+      dispatch(getSearchValue(searchValue));
+    });
+  }
+
   render() {
     const { title, showIcon } = this.props;
-    const { showSearch } = this.state;
+    const { showSearch, searchValue } = this.state;
     return (
       <header>
         <Link to="/profile">
@@ -49,8 +63,11 @@ class Header extends React.Component {
             <input
               data-testid="search-input"
               type="text"
+              value={ searchValue }
+              onChange={ this.handleChange }
+              name="searchValue"
             />
-            <SearchBar />
+            <SearchBar { ...this.props } />
           </div>
         )}
       </header>
@@ -61,6 +78,7 @@ class Header extends React.Component {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   showIcon: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Header;
+export default connect()(Header);
