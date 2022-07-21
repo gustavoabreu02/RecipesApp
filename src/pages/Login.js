@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-/* import { Link } from 'react-router-dom'; */
 import { getUserEmail } from '../redux/Actions/actions';
-// import { getUserEmail } from '../actions';
 
 const INICIAL_STATE = {
   isSaveButtonDisabled: true,
@@ -31,7 +29,6 @@ class Login extends React.Component {
     handleClick = (event) => {
       event.preventDefault();
       const { dispatch, history } = this.props;
-      console.log(this.props);
       const { email } = this.state;
       dispatch(getUserEmail(email));
       localStorage.setItem('user', JSON.stringify({ email }));
@@ -85,16 +82,11 @@ class Login extends React.Component {
     }
 }
 
-/* const mapDispatchToProps = (dispatch) => ({
-  user: (email) => dispatch(getUserEmail(email)),
-}); */
-
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-
 };
 
 export default connect(null)(Login);
