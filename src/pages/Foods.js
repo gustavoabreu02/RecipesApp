@@ -118,6 +118,7 @@ class Foods extends React.Component {
   }
 }
 
+// Conferir se está correto pois atualizei online e não estava presente no momento dessas alterações.
 Foods.propTypes = {
   foodsIngredients: PropTypes.instanceOf(Object).isRequired,
   foodsName: PropTypes.instanceOf(Object).isRequired,
