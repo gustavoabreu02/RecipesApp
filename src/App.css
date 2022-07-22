@@ -84,10 +84,6 @@ footer {
   flex-flow: row wrap;
   justify-content: center;
   width: 100%;
-  
-  /* flex-direction: row; */
-  
-  /* flex-wrap: wrap; */
 }
 
 .cardRow {
