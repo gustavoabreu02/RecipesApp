@@ -33,7 +33,7 @@ class Header extends React.Component {
     const { title, showIcon } = this.props;
     const { showSearch, searchValue } = this.state;
     return (
-      <header>
+      <header className="headerContainer">
         <Link to="/profile">
           <button
             data-testid="profile-top-btn"

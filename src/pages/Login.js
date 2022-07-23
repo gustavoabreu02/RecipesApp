@@ -40,8 +40,8 @@ class Login extends React.Component {
     render() {
       const { email, password, isSaveButtonDisabled } = this.state;
       return (
-        <form>
-          <fieldset>
+        <form className="loginContainer">
+          <fieldset className="login">
             <label htmlFor="email">
               Email:
               <input

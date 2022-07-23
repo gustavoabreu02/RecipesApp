@@ -17,8 +17,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
+    <div className="body">
       <Switch>
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/foods/id-da-receita" component={ FoodsRecipe } />

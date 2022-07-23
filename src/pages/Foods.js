@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -16,56 +16,67 @@ class Foods extends React.Component {
     return (
       <div className="foodMain">
         <Header title="Foods" showIcon="true" { ...this.props } />
-        {/* <Link to={ `${retornoDaApi}/${id}` } />  isso faz o link da pag App, só não entendi tudo, se alguém puder me ajudar */}
         <div className="card">
-          { foodsIngredients.filter((recipe, i) => i <= number).map((recipe, i1) => (
-            <div
-              className="cardRow"
-              data-testid={ `${i1}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${i1}-card-img` }
-              />
-              <span data-testid={ `${i1}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
-          { foodsName.filter((recipe, i) => i <= number).map((recipe, i2) => (
-            <div
-              className="cardRow"
-              data-testid={ `${i2}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${i2}-card-img` }
-              />
-              <span data-testid={ `${i2}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
-          { foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, i3) => (
-            <div
-              className="cardRow"
-              data-testid={ `${i3}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${i3}-card-img` }
-              />
-              <span data-testid={ `${i3}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
+          { foodsIngredients.length === 1
+            ? (<Redirect to={ `/foods/${foodsIngredients[0].idMeal}` } />)
+            : (
+              foodsIngredients.filter((recipe, i) => i <= number).map((recipe, i1) => (
+                <div
+                  className="cardRow"
+                  data-testid={ `${i1}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i1}-card-img` }
+                  />
+                  <span data-testid={ `${i1}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
+          { foodsName.length === 1
+            ? (<Redirect to={ `/foods/${foodsName[0].idMeal}` } />)
+            : (
+              foodsName.filter((recipe, i) => i <= number).map((recipe, i2) => (
+                <div
+                  className="cardRow"
+                  data-testid={ `${i2}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i2}-card-img` }
+                  />
+                  <span data-testid={ `${i2}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
+          { foodsFirstLetter.length === 1
+            ? (<Redirect to={ `/foods/${foodsFirstLetter[0].idMeal}` } />)
+            : (
+              foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, i3) => (
+                <div
+                  className="cardRow"
+                  data-testid={ `${i3}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i3}-card-img` }
+                  />
+                  <span data-testid={ `${i3}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
         </div>
         <Footer { ...this.props } />
       </div>
