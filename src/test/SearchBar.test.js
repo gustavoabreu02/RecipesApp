@@ -27,4 +27,19 @@ describe('SearchBar', () => {
     expect(name).toBeInTheDocument();
     expect(first).toBeInTheDocument();
   });
+
+  test('Teste se busca um elemento na barra de pesquisa.', async () => {
+    renderWithRouter(<App />, {}, '/foods');
+    const searchBtn = screen.getByTestId('search-top-btn');
+    const searchInput = screen.queryByTestId('search-input');
+    const filterName = screen.queryByTestId('name-search-radio');
+    const search = screen.queryByTestId('exec-search-btn');
+
+    userEvent.click(searchBtn);
+    expect(searchInput).toBeInTheDocument();
+    userEvent.type(searchBtn, 'cake');
+    userEvent.click(filterName);
+    userEvent.click(search);
+    expect(await screen.getByText(/pancakes/i)).toBeInTheDocument();
+  });
 });
