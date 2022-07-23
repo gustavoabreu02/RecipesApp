@@ -13,6 +13,8 @@ import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 
+// A mudança no código estava quebrando o 7 e 8 então removi, mas está salvo e enviado no slack
+
 function App() {
   return (
     <div className="meals">

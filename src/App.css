@@ -72,7 +72,7 @@ footer {
   position: fixed;
 }
 
-.startRecipeBtn {
+.startRecipeBtn .finishRecipeBtn {
   bottom: 0;
   position: fixed;
 }

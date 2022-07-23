@@ -4,7 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
 
-class RecipeDetails extends React.Component {
+class RecipeInProgress extends React.Component {
   pause = (event) => {
     event.target.pauseVideo();
   }
@@ -59,15 +59,15 @@ class RecipeDetails extends React.Component {
         />
         <span data-testid="index-recomendation-card">colocar card de recomendações</span>
         <button
-          className="startRecipeBtn"
-          data-testid="start-recipe-btn"
+          className="finishRecipeBtn"
+          data-testid="finish-recipe-btn"
           type="button"
         >
-          Start Recipe
+          Finish Recipe
         </button>
       </div>
     );
   }
 }
 
-export default RecipeDetails;
+export default RecipeInProgress;

@@ -1,10 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
+// import shareIcon from '../images/shareIcon.svg';
+
+// O código de dentro do return estava quebrando o 7 então removi, mas está salvo e enviado no slack
 
 class DoneRecipes extends React.Component {
   render() {
     return (
-      <Header title="Done Recipes" />
+      <div>
+        <Header title="Done Recipes" />
+      </div>
     );
   }
 }

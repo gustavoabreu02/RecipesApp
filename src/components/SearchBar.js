@@ -86,7 +86,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { foodsIngredients, foodsName, foodsFirstLetter } = this.props;
     return (
       <div className="container-search-bar">
         <label htmlFor="ingredient">
@@ -124,58 +123,21 @@ class SearchBar extends React.Component {
           type="button"
           onClick={ () => {
             const { idFilter } = this.state;
-            const { searchValue, page } = this.props;
-            if (idFilter === 'ingredient' && page === 'foods') {
+            const { searchValue } = this.props;
+            if (idFilter === 'ingredient'/*  && page === 'foods' */) {
               this.getFoodByIngredients(searchValue);
-            } else if (idFilter === 'nameSearch' && page === 'foods') {
-              this.getFoodByNames(searchValue);
-            } else if (idFilter === 'firstLetter' && page === 'foods') {
-              this.getFoodByFirstLetter(searchValue);
-            } else if (idFilter === 'ingredient' && page === 'drinks') {
               this.getDrinksByIngredients(searchValue);
-            } else if (idFilter === 'nameSearch' && page === 'drinks') {
+            } else if (idFilter === 'nameSearch'/*  && page === 'foods' */) {
+              this.getFoodByNames(searchValue);
               this.getDrinksByNames(searchValue);
-            } else if (idFilter === 'firstLetter' && page === 'drinks') {
+            } else if (idFilter === 'firstLetter'/*  && page === 'foods' */) {
+              this.getFoodByFirstLetter(searchValue);
               this.getDrinksByFirstLetter(searchValue);
             }
           } }
         >
           Search
         </button>
-        { foodsIngredients.map((receita, index) => (
-          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
-            <img
-              src={ receita.strMealThumb }
-              alt={ receita.strMeal }
-              data-testid={ `${index}-card-img ` }
-            />
-            <span data-testid={ `${index}-card-name` }>
-              { receita.strMeal }
-              {' '}
-            </span>
-          </div>
-        )) }
-        { foodsName.map((receita, index) => (
-          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
-            <img src={ receita.strMealThumb } alt={ receita.strMeal } />
-            <span data-testid={ `${index}-card-name` }>
-              { receita.strMeal }
-              {' '}
-            </span>
-          </div>
-        )) }
-        { foodsFirstLetter.map((receita, index) => (
-          <div data-testid={ `${index}-recipe-card` } key={ receita.idMeal }>
-            <img
-              src={ receita.strMealThumb }
-              alt={ receita.strMeal }
-              data-testid={ `${index}-card-img ` }
-            />
-            <span data-testid={ `${index}-card-name` }>
-              { receita.strMeal }
-            </span>
-          </div>
-        )) }
       </div>
     );
   }
@@ -184,18 +146,10 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
-  foodsIngredients: PropTypes.instanceOf(Object).isRequired,
-  foodsName: PropTypes.instanceOf(Object).isRequired,
-  foodsFirstLetter: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   searchValue: state.foodsReducer.searchValue,
-  page: state.foodsReducer.page,
-  foodsIngredients: state.foodsReducer.ingredient.meals,
-  foodsName: state.foodsReducer.name.meals,
-  foodsFirstLetter: state.foodsReducer.firstLetter.meals,
 });
 
 export default connect(mapStateToProps)(SearchBar);
