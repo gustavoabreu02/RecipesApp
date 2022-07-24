@@ -156,3 +156,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(SearchBar);
+
+// css pronto

@@ -100,7 +100,12 @@
   display: flex;
 }
 
-.startRecipeBtn .finishRecipeBtn {
+.startRecipeBtn {
+  bottom: 0;
+  position: fixed;
+}
+
+.finishRecipeBtn {
   bottom: 0;
   position: fixed;
 }
