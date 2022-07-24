@@ -7,11 +7,16 @@ import Header from '../components/Header';
 class DoneRecipes extends React.Component {
   render() {
     return (
-      <div>
+      <div className="body color">
         <Header title="Done Recipes" />
+        <div className="doneContainer">
+          <p> Aqui virá o resto do conteúdo</p>
+        </div>
       </div>
     );
   }
 }
 
 export default DoneRecipes;
+
+// corrigir css

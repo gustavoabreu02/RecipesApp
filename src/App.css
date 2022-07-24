@@ -100,6 +100,95 @@
   display: flex;
 }
 
+.color {
+  height: 820px;
+}
+
+.cardContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
+}
+
+.individualCardC {
+  align-items: center;
+  border: 1px solid #464646;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 1%;
+  padding: 2%;
+  text-align: center;
+  width: 30%;
+}
+
+.imgFandD {
+  border-radius: 10px;
+  width: 84%;
+}
+
+.headerContainerTwo {
+  align-items: center;
+  background-color: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* .headerContainerTwo, a {
+  padding-left: -30px;
+  padding-right: 80px;
+} */
+
+.profileContainer {
+  align-items: center;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.btnContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+  width: 100%;
+}
+
+/* .headerContainerDandF {
+  align-content: space-around;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  font-size: medium;
+  padding: 0;
+} */
+
+.doneContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
+}
+
+.favoriteContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
+}
+
 .startRecipeBtn {
   bottom: 0;
   position: fixed;

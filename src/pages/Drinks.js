@@ -11,17 +11,20 @@ class Drinks extends React.Component {
       drinkIngredient, firstLetterDrinks } = this.props;
     const number = 11;
     return (
-      <div>
-        <Header title="Drinks" showIcon="true" />
-        { nameDrink.length === 1
-          ? (<Redirect to={ `/drinks/${nameDrink[0].idDrink}` } />)
-          : (
-            nameDrink.filter((recipe, i) => i <= number).map((recipe, i1) => (
-              <div key={ recipe.idDrink }>
+      <div className="body color">
+        <Header title="Drinks" showIcon="true" className="headerContainer" />
+        <div className="cardContainer">
+          { nameDrink.length === 1
+            ? (<Redirect to={ `/drinks/${nameDrink[0].idDrink}` } />)
+            : (
+              nameDrink.filter((recipe, i) => i <= number).map((recipe, i1) => (
                 <div
+                  className="individualCardC"
+                  key={ recipe.idDrink }
                   data-testid={ `${i1}-recipe-card` }
                 >
                   <img
+                    className="imgFandD"
                     src={ recipe.strDrinkThumb }
                     alt={ recipe.strDrink }
                     data-testid={ `${i1}-card-img` }
@@ -30,19 +33,20 @@ class Drinks extends React.Component {
                     { recipe.strDrink }
                   </span>
                 </div>
-              </div>
-            ))
-          )}
-        { firstLetterDrinks.length === 1
-          ? (<Redirect to={ `/drinks/${firstLetterDrinks[0].idDrink}` } />)
-          : (
-            firstLetterDrinks.filter((recipe, i) => i <= number)
-              .map((recipe, i1) => (
-                <div key={ recipe.idDrink }>
+              ))
+            )}
+          { firstLetterDrinks.length === 1
+            ? (<Redirect to={ `/drinks/${firstLetterDrinks[0].idDrink}` } />)
+            : (
+              firstLetterDrinks.filter((recipe, i) => i <= number)
+                .map((recipe, i1) => (
                   <div
+                    className="individualCardC"
+                    key={ recipe.idDrink }
                     data-testid={ `${i1}-recipe-card` }
                   >
                     <img
+                      className="imgFandD"
                       src={ recipe.strDrinkThumb }
                       alt={ recipe.strDrink }
                       data-testid={ `${i1}-card-img` }
@@ -51,20 +55,21 @@ class Drinks extends React.Component {
                       { recipe.strDrink }
                     </span>
                   </div>
-                </div>
-              ))
-          )}
-        { drinkIngredient.length === 1
-          ? (<Redirect to={ `/drinks/${drinkIngredient[0].idDrink}` } />)
-          : (
-            drinkIngredient
-              .filter((recipe, i) => i <= number)
-              .map((recipe, i1) => (
-                <div key={ i1 }>
+                ))
+            )}
+          { drinkIngredient.length === 1
+            ? (<Redirect to={ `/drinks/${drinkIngredient[0].idDrink}` } />)
+            : (
+              drinkIngredient
+                .filter((recipe, i) => i <= number)
+                .map((recipe, i1) => (
                   <div
+                    className="individualCardC"
+                    key={ i1 }
                     data-testid={ `${i1}-recipe-card` }
                   >
                     <img
+                      className="imgFandD"
                       src={ recipe.strDrinkThumb }
                       alt={ recipe.strDrink }
                       data-testid={ `${i1}-card-img` }
@@ -73,9 +78,9 @@ class Drinks extends React.Component {
                       { recipe.strDrink }
                     </span>
                   </div>
-                </div>
-              ))
-          )}
+                ))
+            )}
+        </div>
         <Footer />
       </div>
     );
@@ -96,4 +101,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(Drinks);
 
-// refazer css
+// css pronto

@@ -14,18 +14,20 @@ class Foods extends React.Component {
     } = this.props;
     const number = 11;
     return (
-      <div>
+      <div className="body color">
         <Header title="Foods" showIcon="true" { ...this.props } />
-        <div>
+        <div className="cardContainer">
           { foodsIngredients.length === 1
             ? (<Redirect to={ `/foods/${foodsIngredients[0].idMeal}` } />)
             : (
               foodsIngredients.filter((recipe, i) => i <= number).map((recipe, i1) => (
                 <div
+                  className="individualCardC"
                   data-testid={ `${i1}-recipe-card` }
                   key={ recipe.idMeal }
                 >
                   <img
+                    className="imgFandD"
                     src={ recipe.strMealThumb }
                     alt={ recipe.strMeal }
                     data-testid={ `${i1}-card-img` }
@@ -41,10 +43,12 @@ class Foods extends React.Component {
             : (
               foodsName.filter((recipe, i) => i <= number).map((recipe, i2) => (
                 <div
+                  className="individualCardC"
                   data-testid={ `${i2}-recipe-card` }
                   key={ recipe.idMeal }
                 >
                   <img
+                    className="imgFandD"
                     src={ recipe.strMealThumb }
                     alt={ recipe.strMeal }
                     data-testid={ `${i2}-card-img` }
@@ -60,10 +64,12 @@ class Foods extends React.Component {
             : (
               foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, i3) => (
                 <div
+                  className="individualCardC"
                   data-testid={ `${i3}-recipe-card` }
                   key={ recipe.idMeal }
                 >
                   <img
+                    className="imgFandD"
                     src={ recipe.strMealThumb }
                     alt={ recipe.strMeal }
                     data-testid={ `${i3}-card-img` }

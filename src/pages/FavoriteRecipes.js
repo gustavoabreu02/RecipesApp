@@ -7,11 +7,16 @@ import Header from '../components/Header';
 class FavoriteRecipes extends React.Component {
   render() {
     return (
-      <div>
+      <div className="body color">
         <Header title="Favorite Recipes" />
+        <div className="favoriteContainer">
+          <p> Aqui virá o resto do conteúdo</p>
+        </div>
       </div>
     );
   }
 }
 
 export default FavoriteRecipes;
+
+// corrigir css
