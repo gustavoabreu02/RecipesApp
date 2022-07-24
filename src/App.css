@@ -27,44 +27,80 @@
   align-content: center;
   background: #c2e0f0;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-around;
 }
 
-footer {
+.btnImg {
+  align-content: center;
+  align-items: center;
+  background-color: #c2e0f0;
+  border: #c2e0f0;
+  display: flex;
+}
+
+.pIcon {
+  margin-top: 8px;
+}
+
+.sInput {
+  border: 1px solid #c2e0f0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.SbContainer {
+  align-items: center;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+  width: 320px;
+}
+
+.searchBar {
+  align-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.SbInput {
+  margin-right: 5px;
+  margin-top: 6px;
+}
+
+.sBtn {
+  background-color: #c2e0f0;
+  border: 1px solid #464646;
+  border-radius: 10px;
+}
+
+.footerContainer {
   bottom: 0;
   position: fixed;
+  width: 100%;
+}
+
+.footer {
+  align-content: center;
+  background-color: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.fIcon {
+  background-color: #c2e0f0;
+  border: #c2e0f0;
+  display: flex;
 }
 
 .startRecipeBtn .finishRecipeBtn {
   bottom: 0;
   position: fixed;
 }
-
-.card {
-  align-items: center;
-  background-color: blue;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 100%;
-}
-
-.cardRow {
-  background-color: yellow;
-  display: flex;
-  width: 33%;
-}
-
-.card img {
-  width: 50px;
-}
-
-.foodMain {
-  background-color: purple;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-}
-

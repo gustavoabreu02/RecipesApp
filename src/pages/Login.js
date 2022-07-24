@@ -66,6 +66,7 @@ class Login extends React.Component {
             </label>
             {/* <Link to="/foods"> */}
             <button
+              className="sBtn"
               id="login-submit-btn"
               type="button"
               name="login-submit-btn"

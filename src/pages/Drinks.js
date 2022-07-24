@@ -11,7 +11,7 @@ class Drinks extends React.Component {
       drinkIngredient, firstLetterDrinks } = this.props;
     const number = 11;
     return (
-      <div className="card">
+      <div>
         <Header title="Drinks" showIcon="true" />
         { nameDrink.length === 1
           ? (<Redirect to={ `/drinks/${nameDrink[0].idDrink}` } />)
@@ -19,7 +19,6 @@ class Drinks extends React.Component {
             nameDrink.filter((recipe, i) => i <= number).map((recipe, i1) => (
               <div key={ recipe.idDrink }>
                 <div
-                  className="cardRow"
                   data-testid={ `${i1}-recipe-card` }
                 >
                   <img
@@ -41,7 +40,6 @@ class Drinks extends React.Component {
               .map((recipe, i1) => (
                 <div key={ recipe.idDrink }>
                   <div
-                    className="cardRow"
                     data-testid={ `${i1}-recipe-card` }
                   >
                     <img
@@ -64,7 +62,6 @@ class Drinks extends React.Component {
               .map((recipe, i1) => (
                 <div key={ i1 }>
                   <div
-                    className="cardRow"
                     data-testid={ `${i1}-recipe-card` }
                   >
                     <img

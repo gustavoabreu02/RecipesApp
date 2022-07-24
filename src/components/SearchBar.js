@@ -87,57 +87,60 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="container-search-bar">
-        <label htmlFor="ingredient">
-          <input
-            name="optionFilter"
-            data-testid="ingredient-search-radio"
-            type="radio"
-            id="ingredient"
-            onClick={ this.handleClick }
-          />
-          Ingredient
-        </label>
-        <label htmlFor="nameSearch">
-          <input
-            data-testid="name-search-radio"
-            name="optionFilter"
-            type="radio"
-            id="nameSearch"
-            onClick={ this.handleClick }
-          />
-          Name
-        </label>
-        <label htmlFor="firstLetter">
-          <input
-            data-testid="first-letter-search-radio"
-            name="optionFilter"
-            type="radio"
-            id="firstLetter"
-            onClick={ this.handleClick }
-          />
-          First letter
-        </label>
-        <button
-          data-testid="exec-search-btn"
-          type="button"
-          onClick={ () => {
-            const { idFilter } = this.state;
-            const { searchValue } = this.props;
-            if (idFilter === 'ingredient'/*  && page === 'foods' */) {
-              this.getFoodByIngredients(searchValue);
-              this.getDrinksByIngredients(searchValue);
-            } else if (idFilter === 'nameSearch'/*  && page === 'foods' */) {
-              this.getFoodByNames(searchValue);
-              this.getDrinksByNames(searchValue);
-            } else if (idFilter === 'firstLetter'/*  && page === 'foods' */) {
-              this.getFoodByFirstLetter(searchValue);
-              this.getDrinksByFirstLetter(searchValue);
-            }
-          } }
-        >
-          Search
-        </button>
+      <div className="SbContainer">
+        <span className="searchBar">
+          <label htmlFor="ingredient" className="SbInput">
+            <input
+              name="optionFilter"
+              data-testid="ingredient-search-radio"
+              type="radio"
+              id="ingredient"
+              onClick={ this.handleClick }
+            />
+            Ingredient
+          </label>
+          <label htmlFor="nameSearch" className="SbInput">
+            <input
+              data-testid="name-search-radio"
+              name="optionFilter"
+              type="radio"
+              id="nameSearch"
+              onClick={ this.handleClick }
+            />
+            Name
+          </label>
+          <label htmlFor="firstLetter" className="SbInput">
+            <input
+              data-testid="first-letter-search-radio"
+              name="optionFilter"
+              type="radio"
+              id="firstLetter"
+              onClick={ this.handleClick }
+            />
+            First letter
+          </label>
+          <button
+            className="sBtn"
+            data-testid="exec-search-btn"
+            type="button"
+            onClick={ () => {
+              const { idFilter } = this.state;
+              const { searchValue } = this.props;
+              if (idFilter === 'ingredient'/*  && page === 'foods' */) {
+                this.getFoodByIngredients(searchValue);
+                this.getDrinksByIngredients(searchValue);
+              } else if (idFilter === 'nameSearch'/*  && page === 'foods' */) {
+                this.getFoodByNames(searchValue);
+                this.getDrinksByNames(searchValue);
+              } else if (idFilter === 'firstLetter'/*  && page === 'foods' */) {
+                this.getFoodByFirstLetter(searchValue);
+                this.getDrinksByFirstLetter(searchValue);
+              }
+            } }
+          >
+            Search
+          </button>
+        </span>
       </div>
     );
   }
