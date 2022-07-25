@@ -13,6 +13,9 @@ class Foods extends React.Component {
       foodsFirstLetter,
     } = this.props;
     const number = 11;
+    console.log({ foodsIngredients,
+      foodsName,
+      foodsFirstLetter });
     return (
       <div className="body color">
         <Header title="Foods" showIcon="true" { ...this.props } />
@@ -94,9 +97,9 @@ Foods.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  foodsIngredients: state.foodsReducer.ingredient.meals || [],
-  foodsName: state.foodsReducer.name.meals || [],
-  foodsFirstLetter: state.foodsReducer.firstLetter.meals || [],
+  foodsIngredients: state.foodsReducer.ingredient.meals,
+  foodsName: state.foodsReducer.name.meals,
+  foodsFirstLetter: state.foodsReducer.firstLetter.meals,
 });
 
 export default connect(mapStateToProps)(Foods);

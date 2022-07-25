@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   firstLetterDrinks: { drinks: [] },
 };
 const foodsReducer = (state = INITIAL_STATE, action) => {
+  console.log(action);
   switch (action.type) {
   case FIRST_LETTER:
     return { ...state, firstLetter: action.first,

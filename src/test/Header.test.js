@@ -7,11 +7,7 @@ import fetch from '../../cypress/mocks/fetch';
 
 const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(() => Promise.resolve({
-      status: 200,
-      ok: true,
-      json: () => Promise.resolve(fetch),
-    }));
+    .mockImplementation(fetch);
 };
 
 describe('Testa a Header:', () => {
@@ -19,41 +15,69 @@ describe('Testa a Header:', () => {
   afterEach(() => jest.clearAllMocks());
 
   test('Um elemento que exiba o email do usuário que fez login.', () => {
-    renderWithRouter(<App />, {}, '/drinks');
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
     const profileBtn = screen.getByTestId('profile-top-btn');
     const searchBtn = screen.getByTestId('search-top-btn');
-    const searchInput = screen.queryByTestId('search-input');
+    const idSearchInput = 'search-input';
 
     expect(profileBtn).toBeInTheDocument();
     expect(searchBtn).toBeInTheDocument();
     expect(profileBtn).toHaveAttribute('src', 'profileIcon.svg');
     expect(searchBtn).toHaveAttribute('src', 'searchIcon.svg');
-    expect(searchInput).not.toBeInTheDocument();
+    expect(screen.queryByTestId(idSearchInput)).not.toBeInTheDocument();
 
     userEvent.click(searchBtn);
-    expect(searchInput).toBeInTheDocument();
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
 
     userEvent.click(searchBtn);
-    expect(searchInput).not.toBeInTheDocument();
+    expect(screen.queryByTestId(idSearchInput)).not.toBeInTheDocument();
   });
 
   test('Teste se busca um elemento na barra de pesquisa.', async () => {
-    renderWithRouter(<App />, {}, '/drinks');
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
     const searchBtn = screen.getByTestId('search-top-btn');
-    const searchInput = screen.queryByTestId('search-input');
-    const filterName = screen.queryByTestId('name-search-radio');
-    const search = screen.queryByTestId('exec-search-btn');
+    const idSearchInput = 'search-input';
 
     userEvent.click(searchBtn);
-    expect(searchInput).toBeInTheDocument();
-    userEvent.type(searchBtn, 'gin');
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId(idSearchInput), 'gin');
+
+    const filterName = screen.queryByTestId('name-search-radio');
     userEvent.click(filterName);
+
+    const search = screen.queryByTestId('exec-search-btn');
     userEvent.click(search);
-    expect(await screen.getByText(/pink gin/i)).toBeInTheDocument();
   });
 
   test(' Teste se cada página recebe seu próprio título `Drinks`', () => {
-    renderWithRouter(<App />, {}, '/drinks');
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
     const pageTitle = screen.queryByTestId('page-title');
     const textTitle = screen.queryByText(/Drinks/i);
     expect(pageTitle).toBeInTheDocument();
@@ -61,7 +85,16 @@ describe('Testa a Header:', () => {
   });
 
   test(' Teste se cada página recebe seu próprio título `Foods`', () => {
-    renderWithRouter(<App />, {}, '/foods');
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const pageTitle = screen.queryByTestId('page-title');
     const textTitle = screen.queryByText(/Foods/i);
     expect(pageTitle).toBeInTheDocument();

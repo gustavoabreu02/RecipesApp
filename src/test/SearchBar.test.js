@@ -1,24 +1,37 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
 import App from '../App';
 import fetch from '../../cypress/mocks/fetch';
 
 const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(() => Promise.resolve({
-      status: 200,
-      ok: true,
-      json: () => Promise.resolve(fetch),
-    }));
+    .mockImplementation(fetch);
 };
+
+const idSearchInput = 'search-input';
+const idSearchBtn = 'exec-search-btn';
+const lupa = 'search-top-btn';
 
 describe('SearchBar', () => {
   beforeEach(mockFetch);
   afterEach(() => jest.clearAllMocks());
 
-  test('Elementos do Search Bar', () => {
-    renderWithRouter(<App />, {}, '/foods');
+  test('Teste se há os elementos do Search Bar', () => {
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
+    const searchBtn = screen.getByTestId(lupa);
+    userEvent.click(searchBtn);
+
     const ingredient = screen.getByTestId('ingredient-search-radio');
     const name = screen.getByTestId('name-search-radio');
     const first = screen.getByTestId('first-letter-search-radio');
@@ -28,18 +41,74 @@ describe('SearchBar', () => {
     expect(first).toBeInTheDocument();
   });
 
-  test('Teste se busca um elemento na barra de pesquisa.', async () => {
-    renderWithRouter(<App />, {}, '/foods');
-    const searchBtn = screen.getByTestId('search-top-btn');
-    const searchInput = screen.queryByTestId('search-input');
-    const filterName = screen.queryByTestId('name-search-radio');
-    const search = screen.queryByTestId('exec-search-btn');
+  test.only('Teste se busca um elemento name.', async () => {
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    const searchBtn = screen.getByTestId(lupa);
 
     userEvent.click(searchBtn);
-    expect(searchInput).toBeInTheDocument();
-    userEvent.type(searchBtn, 'cake');
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId(idSearchInput), 'soup');
+
+    const filterName = screen.queryByTestId('name-search-radio');
     userEvent.click(filterName);
+
+    const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
-    expect(await screen.getByText(/pancakes/i)).toBeInTheDocument();
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
+  });
+  test('Teste se busca um elemento ingredient', () => {
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    const searchBtn = screen.getByTestId(lupa);
+
+    userEvent.click(searchBtn);
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId(idSearchInput), 'rice');
+
+    const filterName = screen.queryByTestId('ingredient-search-radio');
+    userEvent.click(filterName);
+
+    const search = screen.queryByTestId(idSearchBtn);
+    userEvent.click(search);
+  });
+  test('Teste se busca um elemento first letter', () => {
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+    };
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    const searchBtn = screen.getByTestId(lupa);
+
+    userEvent.click(searchBtn);
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId(idSearchInput), 'c');
+
+    const filterFirstLetter = screen.queryByTestId('first-letter-search-radio');
+    userEvent.click(filterFirstLetter);
+
+    const search = screen.queryByTestId(idSearchBtn);
+    userEvent.click(search);
   });
 });
