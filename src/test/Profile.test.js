@@ -1,16 +1,16 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Profile from './pages/Login';
-import renderWithRouter from './renderWithRouterAndRedux';
-import App from './App';
+import Profile from '../pages/Login';
+import renderWithRouter from '../renderWithRouterAndRedux';
+import App from '../App';
 
 let globalHistory;
 
 describe('Teste o componente <Profile.js />',
   () => {
     beforeEach(() => {
-      const email = 'email@gmail.com';
+      const email = '';
       localStorage.setItem('user', JSON.stringify({ email }));
       localStorage.setItem('mealsToken', 1);
       localStorage.setItem('cocktailsToken', 1);
@@ -22,6 +22,29 @@ describe('Teste o componente <Profile.js />',
       () => {
         renderWithRouter(<Profile />);
         const profileEmail = screen.getByTestId('profile-email');
+
+        expect(profileEmail).toHaveAttribute(null);
+      },
+    );
+  });
+
+describe('Teste o componente <Profile.js />',
+  () => {
+    beforeEach(() => {
+      const email = 'email@gmail.com';
+      localStorage.setItem('user', JSON.stringify({ email }));
+      localStorage.setItem('mealsToken', 1);
+      localStorage.setItem('cocktailsToken', 1);
+      const { history } = renderWithRouter(<App />, {}, '/profile');
+      globalHistory = history;
+    });
+
+    test(
+      'Implemente os elementos da tela de perfil respeitando os atributos descrito',
+      () => {
+        renderWithRouter(<Profile />);
+        const title = screen.getByRole('heading', { name: /Profile/i });
+        const profileEmail = screen.getByTestId('profile-email');
         const profileDoneBtn = screen.getByTestId('profile-done-btn');
         const profileFavoriteBtn = screen.getByTestId('profile-favorite-btn');
         const profileLogoutBtn = screen.getByTestId('profile-logout-btn');
@@ -30,6 +53,7 @@ describe('Teste o componente <Profile.js />',
         expect(profileDoneBtn).toBeInTheDocument();
         expect(profileFavoriteBtn).toBeInTheDocument();
         expect(profileLogoutBtn).toBeInTheDocument();
+        expect(title).toBeInTheDocument();
       },
     );
 
@@ -50,7 +74,6 @@ describe('Teste o componente <Profile.js />',
     test(
       'Redirecione o usuário ao clicar no botão de "Done Recipes', () => {
         const profileDoneBtn = screen.getByRole('button', { name: /Done Recipes/i });
-
         userEvent.click(profileDoneBtn);
 
         expect(globalHistory.location.pathname).toBe('/done-recipes');
@@ -60,7 +83,6 @@ describe('Teste o componente <Profile.js />',
       'Redirecione o usuário ao clicar no botão de "Favorite Recipes"', () => {
         const profileFavoriteBtn = screen.getByRole('button',
           { name: /Favorite Recipes/i });
-
         userEvent.click(profileFavoriteBtn);
 
         expect(globalHistory.location.pathname).toBe('/favorite-recipes');
@@ -71,7 +93,6 @@ describe('Teste o componente <Profile.js />',
         const profileLogoutBtn = screen.getByRole('button', {
           name: /logout/i,
         });
-
         userEvent.click(profileLogoutBtn);
 
         expect(globalHistory.location.pathname).toBe('/');

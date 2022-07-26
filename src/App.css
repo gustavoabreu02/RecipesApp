@@ -1,75 +1,192 @@
-.meals {
-  align-items: center;
-  background: #0fa36b;
+.body {
+  background: #ceefff;
   color: #464646;
+  font-family: Arial , Helvetica , sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.loginContainer {
+  align-content: center;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
+  justify-content: center;
+  padding: 85% 50%;
+}
+
+.login {
+  align-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.headerContainer {
+  align-content: center;
+  background: #c2e0f0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.btnImg {
+  align-content: center;
+  align-items: center;
+  background-color: #c2e0f0;
+  border: #c2e0f0;
+  display: flex;
+}
+
+.pIcon {
+  margin-top: 8px;
+}
+
+.sInput {
+  border: 1px solid #c2e0f0;
+  border-radius: 10px;
+  display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 40vh;
+.SbContainer {
+  align-items: center;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+  width: 320px;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.searchBar {
+  align-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.SbInput {
+  margin-right: 5px;
+  margin-top: 6px;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.sBtn {
+  background-color: #c2e0f0;
+  border: 1px solid #464646;
+  border-radius: 10px;
 }
 
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
-}
-
-footer {
+.footerContainer {
   bottom: 0;
   position: fixed;
+  width: 100%;
+}
+
+.footer {
+  align-content: center;
+  background-color: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.fIcon {
+  background-color: #c2e0f0;
+  border: #c2e0f0;
+  display: flex;
+}
+
+.color {
+  height: 820px;
+}
+
+.cardContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
+}
+
+.individualCardC {
+  align-items: center;
+  border: 1px solid #464646;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 1%;
+  padding: 2%;
+  text-align: center;
+  width: 30%;
+}
+
+.imgFandD {
+  border-radius: 10px;
+  width: 84%;
+}
+
+.headerContainerTwo {
+  align-items: center;
+  background-color: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* .headerContainerTwo, a {
+  padding-left: -30px;
+  padding-right: 80px;
+} */
+
+.profileContainer {
+  align-items: center;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.btnContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
+  width: 100%;
+}
+
+/* .headerContainerDandF {
+  align-content: space-around;
+  background: #c2e0f0;
+  display: flex;
+  flex-direction: row;
+  font-size: medium;
+  padding: 0;
+} */
+
+.doneContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
+}
+
+.favoriteContainer {
+  align-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95%;
 }
 
 .startRecipeBtn {
@@ -77,39 +194,7 @@ footer {
   position: fixed;
 }
 
-.card {
-  align-items: center;
-  background-color: blue;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 100%;
-}
-
-.cardRow {
-  background-color: yellow;
-  display: flex;
-  width: 33%;
-}
-
-.card img {
-  width: 50px;
-}
-
-.foodMain {
-  background-color: purple;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-}
-
-header {
-  align-content: center;
-  align-items: center;
-  background-color: black;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
+.finishRecipeBtn {
+  bottom: 0;
+  position: fixed;
 }

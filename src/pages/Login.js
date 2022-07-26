@@ -40,8 +40,8 @@ class Login extends React.Component {
     render() {
       const { email, password, isSaveButtonDisabled } = this.state;
       return (
-        <form>
-          <fieldset>
+        <form className="loginContainer">
+          <fieldset className="login">
             <label htmlFor="email">
               Email:
               <input
@@ -66,6 +66,7 @@ class Login extends React.Component {
             </label>
             {/* <Link to="/foods"> */}
             <button
+              className="sBtn"
               id="login-submit-btn"
               type="button"
               name="login-submit-btn"
@@ -90,3 +91,5 @@ Login.propTypes = {
 };
 
 export default connect(null)(Login);
+
+// css pronto

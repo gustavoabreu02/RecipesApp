@@ -72,7 +72,7 @@ const fetch = (url) => Promise.resolve({
       url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'
     )
       return Promise.resolve(oneDrink);
-
+console.log(url);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997')
       return Promise.resolve(oneDrinkId15997);
 

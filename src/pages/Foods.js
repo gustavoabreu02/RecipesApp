@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -10,107 +11,75 @@ class Foods extends React.Component {
       foodsIngredients,
       foodsName,
       foodsFirstLetter,
-      nameDrink,
-      drinkIngredient, firstLetterDrinks,
     } = this.props;
     const number = 11;
     return (
-
-      <div className="foodMain">
+      <div className="body color">
         <Header title="Foods" showIcon="true" { ...this.props } />
-        <div className="card">
-          { foodsIngredients.filter((recipe, i) => i <= number).map((recipe, index) => (
-            <div
-              className="cardRow"
-              data-testid={ `${index}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${index}-card-img ` }
-              />
-              <span data-testid={ `${index}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
-          { foodsName.filter((recipe, i) => i <= number).map((recipe, index) => (
-            <div
-              className="cardRow"
-              data-testid={ `${index}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img src={ recipe.strMealThumb } alt={ recipe.strMeal } />
-              <span data-testid={ `${index}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
-          { foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, inde) => (
-            <div
-              className="cardRow"
-              data-testid={ `${inde}-recipe-card` }
-              key={ recipe.idMeal }
-            >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${inde}-card-img ` }
-              />
-              <span data-testid={ `${inde}-card-name` }>
-                { recipe.strMeal }
-              </span>
-            </div>
-          )) }
-          { nameDrink.filter((recipe, i) => i <= number).map((recipe, indi) => (
-            <div
-              className="cardRow"
-              data-testid={ `${indi}-recipe-card` }
-              key={ recipe.idDrink }
-            >
-              <img
-                src={ recipe.strDrinkThumb }
-                alt={ recipe.strDrink }
-                data-testid={ `${indi}-card-img ` }
-              />
-              <span data-testid={ `${indi}-card-name` }>
-                { recipe.strDrink }
-              </span>
-            </div>
-          )) }
-          { firstLetterDrinks.filter((recipe, i) => i <= number).map((recipe, ind) => (
-            <div
-              className="cardRow"
-              data-testid={ `${ind}-recipe-card` }
-              key={ recipe.idDrink }
-            >
-              <img
-                src={ recipe.strDrinkThumb }
-                alt={ recipe.strDrink }
-                data-testid={ `${ind}-card-img ` }
-              />
-              <span data-testid={ `${ind}-card-name` }>
-                { recipe.strDrink }
-              </span>
-            </div>
-          )) }
-          { drinkIngredient.filter((recipe, i) => i <= number).map((recipe, indc) => (
-            <div
-              className="cardRow"
-              data-testid={ `${indc}-recipe-card` }
-              key={ recipe.idDrink }
-            >
-              <img
-                src={ recipe.strDrinkThumb }
-                alt={ recipe.strDrink }
-                data-testid={ `${indc}-card-img ` }
-              />
-              <span data-testid={ `${indc}-card-name` }>
-                { recipe.strDrink}
-              </span>
-            </div>
-          )) }
+        <div className="cardContainer">
+          { foodsIngredients.length === 1
+            ? (<Redirect to={ `/foods/${foodsIngredients[0].idMeal}` } />)
+            : (
+              foodsIngredients.filter((recipe, i) => i <= number).map((recipe, i1) => (
+                <div
+                  className="individualCardC"
+                  data-testid={ `${i1}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    className="imgFandD"
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i1}-card-img` }
+                  />
+                  <span data-testid={ `${i1}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
+          { foodsName.length === 1
+            ? (<Redirect to={ `/foods/${foodsName[0].idMeal}` } />)
+            : (
+              foodsName.filter((recipe, i) => i <= number).map((recipe, i2) => (
+                <div
+                  className="individualCardC"
+                  data-testid={ `${i2}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    className="imgFandD"
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i2}-card-img` }
+                  />
+                  <span data-testid={ `${i2}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
+          { foodsFirstLetter.length === 1
+            ? (<Redirect to={ `/foods/${foodsFirstLetter[0].idMeal}` } />)
+            : (
+              foodsFirstLetter.filter((recipe, i) => i <= number).map((recipe, i3) => (
+                <div
+                  className="individualCardC"
+                  data-testid={ `${i3}-recipe-card` }
+                  key={ recipe.idMeal }
+                >
+                  <img
+                    className="imgFandD"
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    data-testid={ `${i3}-card-img` }
+                  />
+                  <span data-testid={ `${i3}-card-name` }>
+                    { recipe.strMeal }
+                  </span>
+                </div>
+              ))
+            )}
         </div>
         <Footer { ...this.props } />
       </div>
@@ -118,23 +87,18 @@ class Foods extends React.Component {
   }
 }
 
-// Conferir se está correto pois atualizei online e não estava presente no momento dessas alterações.
 Foods.propTypes = {
   foodsIngredients: PropTypes.instanceOf(Object).isRequired,
   foodsName: PropTypes.instanceOf(Object).isRequired,
   foodsFirstLetter: PropTypes.instanceOf(Object).isRequired,
-  nameDrink: PropTypes.instanceOf(Object).isRequired,
-  firstLetterDrinks: PropTypes.instanceOf(Object).isRequired,
-  drinkIngredient: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  foodsIngredients: state.foodsReducer.ingredient.meals || [],
-  foodsName: state.foodsReducer.name.meals || [],
-  foodsFirstLetter: state.foodsReducer.firstLetter.meals || [],
-  nameDrink: state.foodsReducer.nameDrink.drinks || [],
-  firstLetterDrinks: state.foodsReducer.firstLetterDrinks.drinks || [],
-  drinkIngredient: state.foodsReducer.drinkIngredient.drinks || [],
+  foodsIngredients: state.foodsReducer.ingredient.meals,
+  foodsName: state.foodsReducer.name.meals,
+  foodsFirstLetter: state.foodsReducer.firstLetter.meals,
 });
 
 export default connect(mapStateToProps)(Foods);
+
+// refazer css
