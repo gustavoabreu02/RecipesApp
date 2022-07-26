@@ -18,29 +18,43 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header title="Profile" />
-        <span data-testid="profile-email">
-          { JSON.parse(localStorage.getItem('user'))?.email || ''}
-        </span>
-        <Link to="/done-recipes">
-          <button data-testid="profile-done-btn" type="button">Done Recipes</button>
-        </Link>
-        <Link to="/favorite-recipes">
-          <button
-            data-testid="profile-favorite-btn"
-            type="button"
-          >
-            Favorite Recipes
-          </button>
-        </Link>
-        <button
-          data-testid="profile-logout-btn"
-          type="button"
-          onClick={ this.handleClick }
-        >
-          Logout
-        </button>
+      <div className="body color">
+        <div className="headerContainerTwo">
+          <Header title="Profile" />
+        </div>
+        <div className="profileContainer">
+          <span data-testid="profile-email">
+            { JSON.parse(localStorage.getItem('user'))?.email || ''}
+          </span>
+          <div className="btnContainer">
+            <Link to="/done-recipes">
+              <button
+                data-testid="profile-done-btn"
+                type="button"
+                className="sBtn"
+              >
+                Done Recipes
+              </button>
+            </Link>
+            <Link to="/favorite-recipes">
+              <button
+                data-testid="profile-favorite-btn"
+                type="button"
+                className="sBtn"
+              >
+                Favorite Recipes
+              </button>
+            </Link>
+            <button
+              data-testid="profile-logout-btn"
+              type="button"
+              onClick={ this.handleClick }
+              className="sBtn"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
         <Footer { ...this.props } />
       </div>
     );
@@ -54,3 +68,5 @@ Profile.propTypes = {
 };
 
 export default Profile;
+
+// css semi pronto

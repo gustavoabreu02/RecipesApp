@@ -13,10 +13,11 @@ import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 
+// A mudança no código estava quebrando o 7 e 8 então removi, mas está salvo e enviado no slack
+
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
+    <div className="body">
       <Switch>
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/foods/id-da-receita" component={ FoodsRecipe } />
@@ -42,3 +43,5 @@ function App() {
 }
 
 export default App;
+
+// css pronto

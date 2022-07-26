@@ -33,9 +33,10 @@ class Header extends React.Component {
     const { title, showIcon } = this.props;
     const { showSearch, searchValue } = this.state;
     return (
-      <header>
+      <header className="headerContainer">
         <Link to="/profile">
           <button
+            className="btnImg pIcon"
             data-testid="profile-top-btn"
             type="button"
             src={ profileIcon }
@@ -49,6 +50,7 @@ class Header extends React.Component {
         {showIcon
         && (
           <button
+            className="btnImg"
             data-testid="search-top-btn"
             type="button"
             src={ searchIcon }
@@ -61,6 +63,7 @@ class Header extends React.Component {
         && (
           <div>
             <input
+              className="sInput"
               data-testid="search-input"
               type="text"
               value={ searchValue }
@@ -82,3 +85,5 @@ Header.propTypes = {
 };
 
 export default connect()(Header);
+
+// css pronto
