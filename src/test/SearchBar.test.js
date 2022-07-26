@@ -3,11 +3,12 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
 import App from '../App';
-import fetch from '../../cypress/mocks/fetch';
+// import fetch from '../../cypress/mocks/fetch';
+import moch from './moch';
 
 const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(fetch);
+    .mockImplementation(moch);
 };
 
 const idSearchInput = 'search-input';
@@ -41,7 +42,7 @@ describe('SearchBar', () => {
     expect(first).toBeInTheDocument();
   });
 
-  test.only('Teste se busca um elemento name.', async () => {
+  test('Teste se busca um elemento name.', async () => {
     const INITIAL_STATE = {
       ingredient: { meals: [] },
       name: { meals: [] },
@@ -56,7 +57,7 @@ describe('SearchBar', () => {
 
     userEvent.click(searchBtn);
     expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
-    userEvent.type(screen.queryByTestId(idSearchInput), 'soup');
+    userEvent.type(screen.queryByTestId(idSearchInput), 'chocolate');
 
     const filterName = screen.queryByTestId('name-search-radio');
     userEvent.click(filterName);

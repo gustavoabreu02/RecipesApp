@@ -126,17 +126,13 @@ class SearchBar extends React.Component {
             onClick={ () => {
               const { idFilter } = this.state;
               const { searchValue } = this.props;
-              console.log('clicou');
-              if (idFilter === 'ingredient'/*  && page === 'foods' */) {
-                console.log('ingredient');
+              if (idFilter === 'ingredient') {
                 this.getFoodByIngredients(searchValue);
                 this.getDrinksByIngredients(searchValue);
-              } else if (idFilter === 'nameSearch'/*  && page === 'foods' */) {
-                console.log('nameSearch');
+              } else if (idFilter === 'nameSearch') {
                 this.getFoodByNames(searchValue);
                 this.getDrinksByNames(searchValue);
-              } else if (idFilter === 'firstLetter'/*  && page === 'foods' */) {
-                console.log('firstLetter');
+              } else if (idFilter === 'firstLetter') {
                 this.getFoodByFirstLetter(searchValue);
                 this.getDrinksByFirstLetter(searchValue);
               }

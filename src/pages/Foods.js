@@ -13,9 +13,6 @@ class Foods extends React.Component {
       foodsFirstLetter,
     } = this.props;
     const number = 11;
-    console.log({ foodsIngredients,
-      foodsName,
-      foodsFirstLetter });
     return (
       <div className="body color">
         <Header title="Foods" showIcon="true" { ...this.props } />

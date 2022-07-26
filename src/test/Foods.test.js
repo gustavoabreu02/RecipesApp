@@ -4,9 +4,16 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
 import FoodsRecipe from '../pages/FoodsRecipe';
 import App from '../App';
+import fetch from '../../cypress/mocks/fetch';
+
+const mockFetch = () => {
+  jest.spyOn(global, 'fetch')
+    .mockImplementation(fetch);
+};
 
 describe('Testa a Header o foods', () => {
   beforeEach(() => {
+    mockFetch();
     const email = 'email@gmail.com';
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('mealsToken', 1);
