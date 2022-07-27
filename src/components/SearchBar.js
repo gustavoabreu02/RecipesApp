@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import { errorRequest, getFoodByLetter,
   getFoodByIngredient, getFoodByName,
-  getDrinkByIngredient, getDrinkByName } from '../redux/Actions/actions';
+  getDrinkByIngredient, getDrinkByName,
+  getDrinkByLetter } from '../redux/Actions/actions';
 
 class SearchBar extends React.Component {
   state = {
@@ -26,6 +28,9 @@ class SearchBar extends React.Component {
     try {
       const foodEndpoint = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`);
       const getFood = await foodEndpoint.json();
+      /* if (getFoodJson.length < 1) {
+        global.alert('Sorry, we havent found any recipes for these filters.');
+      } */
       dispatch(getFoodByName(getFood));
     } catch (error) {
       dispatch(errorRequest(error));
@@ -36,10 +41,9 @@ class SearchBar extends React.Component {
     const { dispatch } = this.props;
     try {
       const foodEndpoint = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
-      const getFoodByFirstLetter = await foodEndpoint.json();
-      dispatch(getFoodByLetter(getFoodByFirstLetter));
+      const getFoodFirstLetter = await foodEndpoint.json();
+      dispatch(getFoodByLetter(getFoodFirstLetter));
     } catch (error) {
-      dispatch(errorRequest(error));
       global.alert('Your search must have only 1 (one) character');
     }
   };
@@ -71,10 +75,10 @@ class SearchBar extends React.Component {
      try {
        const endpoint = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`);
        const getDrinkByFirstLetter = await endpoint.json();
-       dispatch((getDrinkByFirstLetter));
+       dispatch(getDrinkByLetter(getDrinkByFirstLetter));
      } catch (error) {
-       dispatch(errorRequest(error));
        global.alert('Your search must have only 1 (one) character');
+       dispatch(errorRequest(error));
      }
    };
 
@@ -83,6 +87,26 @@ class SearchBar extends React.Component {
     this.setState({
       idFilter: id,
     });
+  }
+
+  searchButton = () => {
+    const { idFilter } = this.state;
+    const { searchValue } = this.props;
+    const history = createBrowserHistory();
+    const { location: { pathname } } = history;
+    if (idFilter === 'ingredient' && pathname.includes('foods')) {
+      this.getFoodByIngredients(searchValue);
+    } else if (idFilter === 'nameSearch' && pathname.includes('foods')) {
+      this.getFoodByNames(searchValue);
+    } else if (idFilter === 'firstLetter' && pathname.includes('foods')) {
+      this.getFoodByFirstLetter(searchValue);
+    } else if (idFilter === 'ingredient' && pathname.includes('drinks')) {
+      this.getDrinksByIngredients(searchValue);
+    } else if (idFilter === 'nameSearch' && pathname.includes('drinks')) {
+      this.getDrinksByNames(searchValue);
+    } else if (idFilter === 'firstLetter' && pathname.includes('drinks')) {
+      this.getDrinksByFirstLetter(searchValue);
+    }
   }
 
   render() {
@@ -123,20 +147,7 @@ class SearchBar extends React.Component {
             className="sBtn"
             data-testid="exec-search-btn"
             type="button"
-            onClick={ () => {
-              const { idFilter } = this.state;
-              const { searchValue } = this.props;
-              if (idFilter === 'ingredient') {
-                this.getFoodByIngredients(searchValue);
-                this.getDrinksByIngredients(searchValue);
-              } else if (idFilter === 'nameSearch') {
-                this.getFoodByNames(searchValue);
-                this.getDrinksByNames(searchValue);
-              } else if (idFilter === 'firstLetter') {
-                this.getFoodByFirstLetter(searchValue);
-                this.getDrinksByFirstLetter(searchValue);
-              }
-            } }
+            onClick={ this.searchButton }
           >
             Search
           </button>
@@ -145,16 +156,11 @@ class SearchBar extends React.Component {
     );
   }
 }
-
 SearchBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
 };
-
 const mapStateToProps = (state) => ({
   searchValue: state.foodsReducer.searchValue,
 });
-
 export default connect(mapStateToProps)(SearchBar);
-
-// css pronto

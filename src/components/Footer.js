@@ -34,7 +34,4 @@ class Footer extends React.Component {
     );
   }
 }
-
 export default connect()(Footer);
-
-// css pronto

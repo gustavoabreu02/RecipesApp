@@ -12,6 +12,7 @@ import DrinksInProgress from './pages/DrinksInProgress';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import Recipes from './pages/Recipes';
 
 // A mudança no código estava quebrando o 7 e 8 então removi, mas está salvo e enviado no slack
 
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="/recipes" component={ Recipes } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </div>

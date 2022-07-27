@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
 import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
@@ -9,6 +10,13 @@ class RecipeDetails extends React.Component {
     event.target.pauseVideo();
   }
 
+  componentDidMount = () => {
+    const { card } = this.props;
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${card.idMeal}`)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
   render() {
     /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
     const opts = {
@@ -18,6 +26,7 @@ class RecipeDetails extends React.Component {
         autoplay: 1,
       },
     };
+
     return (
       <div>
         <img
@@ -69,5 +78,9 @@ class RecipeDetails extends React.Component {
     );
   }
 }
+
+RecipeDetails.propTypes = {
+  card: PropTypes.arrayOf.isRequired,
+};
 
 export default RecipeDetails;

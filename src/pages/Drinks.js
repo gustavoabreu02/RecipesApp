@@ -1,104 +1,132 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+/* import Recipes from './Recipes'; */
 
 class Drinks extends React.Component {
+  state = {
+    data: { drinks: [] },
+    category: { drinks: [] },
+    filter: true,
+    dataInicial: [],
+  }
+
+  componentDidMount = async () => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json())
+      .then((data) => this.setState({ dataInicial: data.drinks, data: data.drinks }));
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
+      .then((response) => response.json())
+      .then((category) => this.setState({ category }));
+  }
+
+  handleClick = ({ target }) => {
+    const { name } = target;
+    const { filter, dataInicial } = this.state;
+    if (filter) {
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`)
+        .then((response) => response.json())
+        .then((data) => this.setState({ data: data.drinks, filter: false }));
+    } else {
+      this.setState({
+        data: dataInicial,
+        filter: true,
+      });
+    }
+  }
+
+  handleClickButtonAll = () => {
+    const { dataInicial } = this.state;
+    this.setState({
+      data: dataInicial,
+    });
+  }
+
   render() {
-    const { nameDrink,
-      drinkIngredient, firstLetterDrinks } = this.props;
+    const { data, category } = this.state;
+    console.log(data);
     const number = 11;
+    const numberFilter = 4;
     return (
       <div className="body color">
-        <Header title="Drinks" showIcon="true" className="headerContainer" />
+        <Header
+          title="Drinks"
+          showIcon="true"
+          className="headerContainer"
+          { ...this.props }
+        />
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ this.handleClickButtonAll }
+        >
+          All
+
+        </button>
+        { category.drinks.filter((cate, i) => i <= numberFilter).map((cate, i) => (
+          <button
+            name={ cate.strCategory }
+            data-testid={ `${cate.strCategory}-category-filter` }
+            key={ i }
+            type="button"
+            onClick={ this.handleClick }
+          >
+            { cate.strCategory }
+
+          </button>
+        )) }
         <div className="cardContainer">
-          { nameDrink.length === 1
-            ? (<Redirect to={ `/drinks/${nameDrink[0].idDrink}` } />)
-            : (
-              nameDrink.filter((recipe, i) => i <= number).map((recipe, i1) => (
+          { data.length === 1
+            ? (
+              <Link to={ `foods/${data[0].idDrink}` }>
                 <div
                   className="individualCardC"
-                  key={ recipe.idDrink }
-                  data-testid={ `${i1}-recipe-card` }
+                  data-testid={ `${0}-recipe-card` }
+                  key={ data[0].idMeal }
                 >
                   <img
                     className="imgFandD"
-                    src={ recipe.strDrinkThumb }
-                    alt={ recipe.strDrink }
-                    data-testid={ `${i1}-card-img` }
+                    src={ data[0].strMealThumb }
+                    alt={ data[0].strMeal }
+                    data-testid={ `${0}-card-img` }
                   />
-                  <span data-testid={ `${i1}-card-name` }>
-                    { recipe.strDrink }
+                  <span data-testid={ `${0}-card-name` }>
+                    { data[0].strMeal }
                   </span>
                 </div>
-              ))
-            )}
-          { firstLetterDrinks.length === 1
-            ? (<Redirect to={ `/drinks/${firstLetterDrinks[0].idDrink}` } />)
+              </Link>
+            )
             : (
-              firstLetterDrinks.filter((recipe, i) => i <= number)
-                .map((recipe, i1) => (
-                  <div
-                    className="individualCardC"
-                    key={ recipe.idDrink }
-                    data-testid={ `${i1}-recipe-card` }
-                  >
-                    <img
-                      className="imgFandD"
-                      src={ recipe.strDrinkThumb }
-                      alt={ recipe.strDrink }
-                      data-testid={ `${i1}-card-img` }
-                    />
-                    <span data-testid={ `${i1}-card-name` }>
-                      { recipe.strDrink }
-                    </span>
-                  </div>
-                ))
-            )}
-          { drinkIngredient.length === 1
-            ? (<Redirect to={ `/drinks/${drinkIngredient[0].idDrink}` } />)
-            : (
-              drinkIngredient
-                .filter((recipe, i) => i <= number)
-                .map((recipe, i1) => (
-                  <div
-                    className="individualCardC"
-                    key={ i1 }
-                    data-testid={ `${i1}-recipe-card` }
-                  >
-                    <img
-                      className="imgFandD"
-                      src={ recipe.strDrinkThumb }
-                      alt={ recipe.strDrink }
-                      data-testid={ `${i1}-card-img` }
-                    />
-                    <span data-testid={ `${i1}-card-name` }>
-                      { recipe.strDrink }
-                    </span>
-                  </div>
-                ))
-            )}
+              data[0] && (
+                data.filter((recipe, i) => i <= number)
+                  .map((recipe, i1) => (
+                    <Link to={ `drinks/${data[i1].idDrink}` } key={ recipe.idDrink }>
+                      <div
+                        className="individualCardC"
+                        data-testid={ `${i1}-recipe-card` }
+                      >
+                        <img
+                          className="imgFandD"
+                          src={ recipe.strDrinkThumb }
+                          alt={ recipe.strDrink }
+                          data-testid={ `${i1}-card-img` }
+                        />
+                        <span data-testid={ `${i1}-card-name` }>
+                          { recipe.strDrink }
+                        </span>
+                      </div>
+                    </Link>
+                  ))
+              ))}
         </div>
-        <Footer />
+        <Footer { ...this.props } />
       </div>
     );
   }
 }
 
-Drinks.propTypes = {
-  nameDrink: PropTypes.instanceOf(Object).isRequired,
-  firstLetterDrinks: PropTypes.instanceOf(Object).isRequired,
-  drinkIngredient: PropTypes.instanceOf(Object).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  nameDrink: state.foodsReducer.nameDrink.drinks || [],
-  firstLetterDrinks: state.foodsReducer.firstLetterDrinks.drinks || [],
-  drinkIngredient: state.foodsReducer.drinkIngredient.drinks || [],
-});
-
-export default connect(mapStateToProps)(Drinks);
+export default connect()(Drinks);
 
 // css pronto
