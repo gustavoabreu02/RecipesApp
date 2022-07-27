@@ -198,3 +198,19 @@
   bottom: 0;
   position: fixed;
 }
+
+.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  width: 295px;
+}
+
+.scrollmenu div {
+  color: white;
+  display: inline-block;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  width: 150px;
+}
