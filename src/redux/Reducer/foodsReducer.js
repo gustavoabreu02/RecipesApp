@@ -1,7 +1,7 @@
 import { ERROR_REQUEST, FIRST_LETTER, ADD_INGREDIENT,
   ADD_BYNAME,
   ADD_SEARCH_VALUE, SEARCH_INGREDIENT, SEARCH_NAME,
-  SEARCH_LETTER,
+  SEARCH_LETTER, TYPE_SEARCH,
 } from '../Actions/actions';
 
 const INITIAL_STATE = {
@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   drinkIngredient: { drinks: [] },
   nameDrink: { drinks: [] },
   firstLetterDrinks: { drinks: [] },
+  typeSearch: false,
 };
 const foodsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -38,6 +39,9 @@ const foodsReducer = (state = INITIAL_STATE, action) => {
     };
   case SEARCH_LETTER:
     return { ...state, firstLetterDrinks: action.first,
+    };
+  case TYPE_SEARCH:
+    return { ...state, typeSearch: action.typeSearch,
     };
   default:
     return state;

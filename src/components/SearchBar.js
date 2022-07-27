@@ -5,7 +5,8 @@ import { createBrowserHistory } from 'history';
 import { errorRequest, getFoodByLetter,
   getFoodByIngredient, getFoodByName,
   getDrinkByIngredient, getDrinkByName,
-  getDrinkByLetter } from '../redux/Actions/actions';
+  getDrinkByLetter,
+  getTypeSearch } from '../redux/Actions/actions';
 
 class SearchBar extends React.Component {
   state = {
@@ -91,8 +92,9 @@ class SearchBar extends React.Component {
 
   searchButton = () => {
     const { idFilter } = this.state;
-    const { searchValue } = this.props;
+    const { searchValue, dispatch } = this.props;
     const history = createBrowserHistory();
+    dispatch(getTypeSearch(true));
     const { location: { pathname } } = history;
     if (idFilter === 'ingredient' && pathname.includes('foods')) {
       this.getFoodByIngredients(searchValue);
