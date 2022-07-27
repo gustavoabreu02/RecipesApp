@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
+import { Link } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
@@ -25,6 +27,8 @@ class DetailsFoods extends React.Component {
     const { data } = this.props;
     const { recomendações } = this.state;
     console.log(recomendações);
+    const history = createBrowserHistory();
+    const { location: { pathname } } = history;
     /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
     const opts = {
       height: '390',
@@ -111,13 +115,15 @@ class DetailsFoods extends React.Component {
 
             )) }
         </div>
-        <button
-          className="startRecipeBtn"
-          data-testid="start-recipe-btn"
-          type="button"
-        >
-          Start Recipe
-        </button>
+        <Link to={ `${pathname}/in-progress` }>
+          <button
+            className="startRecipeBtn"
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Start Recipe
+          </button>
+        </Link>
       </div>
     );
   }

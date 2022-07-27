@@ -31,6 +31,7 @@ const fetch = (url) => Promise.resolve({
   status: 200,
   ok: true,
   json: () => {
+    console.log(url);
     if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list')
       return Promise.resolve(mealCategories);
 
@@ -72,7 +73,6 @@ const fetch = (url) => Promise.resolve({
       url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'
     )
       return Promise.resolve(oneDrink);
-console.log(url);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997')
       return Promise.resolve(oneDrinkId15997);
 

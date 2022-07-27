@@ -12,7 +12,7 @@ import DrinksInProgress from './pages/DrinksInProgress';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import Recipes from './pages/Recipes';
+import Recipes from './components/Recipes';
 import RecipeDetails from './components/RecipeDetails';
 
 // A mudança no código estava quebrando o 7 e 8 então removi, mas está salvo e enviado no slack

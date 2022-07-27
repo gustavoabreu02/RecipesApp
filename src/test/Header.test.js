@@ -51,6 +51,7 @@ describe('Testa a Header:', () => {
       drinkIngredient: { drinks: [] },
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
     const searchBtn = screen.getByTestId('search-top-btn');
@@ -65,6 +66,7 @@ describe('Testa a Header:', () => {
 
     const search = screen.queryByTestId('exec-search-btn');
     userEvent.click(search);
+    // expect(await screen.findByTestId('2-recipe-card')).toBeInTheDocument();
   });
 
   test(' Teste se cada página recebe seu próprio título `Drinks`', () => {
