@@ -66,7 +66,7 @@ class DetailsFoods extends React.Component {
         </button>
         <h3 data-testid="recipe-category">{data.strCategory}</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}
-        <ul data-testid="index-ingredient-name-and-measure">
+        <ul>
           { Object.keys(data).filter((recipe) => recipe.includes('strIngredient'))
             .map((recipe, index) => (
               data[recipe] && (

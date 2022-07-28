@@ -63,7 +63,7 @@ class Drinks extends React.Component {
           <ComponentDrinks />
         ) : (
           <div>
-            <div className="recipeContainer">
+            <div className="recipeBtnC">
               <button
                 type="button"
                 data-testid="All-category-filter"

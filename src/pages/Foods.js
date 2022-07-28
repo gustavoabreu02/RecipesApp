@@ -58,7 +58,7 @@ class Foods extends React.Component {
           <ComponentFoods />
         ) : (
           <div>
-            <div className="recipeContainer">
+            <div className="recipeBtnC">
               <button
                 className="sBtn"
                 type="button"

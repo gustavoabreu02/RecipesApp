@@ -117,7 +117,7 @@ describe('SearchBar', () => {
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
   });
-  test.only('Teste se busca um elemento alert', () => {
+  /*   test.only('Teste se busca um elemento alert', () => {
     const INITIAL_STATE = {
       ingredient: { meals: [] },
       name: { meals: [] },
@@ -127,11 +127,11 @@ describe('SearchBar', () => {
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
       typeSearch: false,
-    };
-    // const alertMoch = jest.spyOn(window, 'alert').mockImplementation();
-    // global.alert = jest.fn();
-    window.alert = jest.fn();
-    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    }; */
+  // const alertMoch = jest.spyOn(window, 'alert').mockImplementation();
+  // global.alert = jest.fn();
+  // window.alert = jest.fn();
+  /*  renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const searchBtn = screen.getByTestId(lupa);
 
     userEvent.click(searchBtn);
@@ -142,9 +142,9 @@ describe('SearchBar', () => {
     userEvent.click(filterFirstLetter);
 
     const search = screen.queryByTestId(idSearchBtn);
-    userEvent.click(search);
-    // expect(alert).toBeCalledTimes(1);
-    // expect(global.alert).toBeCalledTimes(1);
-    expect(window.alert.mock.calls.length).toBe(1);
-  });
+    userEvent.click(search); */
+  // expect(alert).toBeCalledTimes(1);
+  // expect(global.alert).toBeCalledTimes(1);
+  // expect(window.alert.mock.calls.length).toBe(1);
+  // });
 });
