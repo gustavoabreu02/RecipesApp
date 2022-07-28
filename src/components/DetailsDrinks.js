@@ -26,6 +26,7 @@ class DetailsDrinks extends React.Component {
     const number = 5;
     const { data } = this.props;
     const { recomendações } = this.state;
+
     /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
     const opts = {
       height: '390',

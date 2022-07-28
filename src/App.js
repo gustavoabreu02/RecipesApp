@@ -23,18 +23,10 @@ function App() {
       <Switch>
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/foods/id-da-receita" component={ FoodsRecipe } />
-        <Route
-          exact
-          path="/foods/id-da-receita/in-progress"
-          component={ FoodsInProgress }
-        />
+        <Route exact path="/foods/:id/in-progress" component={ FoodsInProgress } />
         <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/drinks/id-da-receita" component={ DrinksRecipe } />
-        <Route
-          exact
-          path="/drinks/id-da-receita/in-progress"
-          component={ DrinksInProgress }
-        />
+        <Route exact path="/drinks/:id/in-progress" component={ DrinksInProgress } />
         <Route path="/foods/:id" component={ RecipeDetails } />
         <Route path="/drinks/:id" component={ RecipeDetails } />
         <Route exact path="/profile" component={ Profile } />
