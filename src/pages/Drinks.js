@@ -48,7 +48,6 @@ class Drinks extends React.Component {
 
   render() {
     const { data, category } = this.state;
-    console.log(data);
     const number = 11;
     const numberFilter = 4;
     const { typeSearch } = this.props;
@@ -64,26 +63,27 @@ class Drinks extends React.Component {
           <ComponentDrinks />
         ) : (
           <div>
-            <button
-              type="button"
-              data-testid="All-category-filter"
-              onClick={ this.handleClickButtonAll }
-            >
-              All
-
-            </button>
-            { category.drinks.filter((cate, i) => i <= numberFilter).map((cate, i) => (
+            <div className="recipeContainer">
               <button
-                name={ cate.strCategory }
-                data-testid={ `${cate.strCategory}-category-filter` }
-                key={ i }
                 type="button"
-                onClick={ this.handleClick }
+                data-testid="All-category-filter"
+                onClick={ this.handleClickButtonAll }
               >
-                { cate.strCategory }
-
+                All
               </button>
-            )) }
+              { category.drinks.filter((cate, i) => i <= numberFilter).map((cate, i) => (
+                <button
+                  name={ cate.strCategory }
+                  data-testid={ `${cate.strCategory}-category-filter` }
+                  key={ i }
+                  type="button"
+                  onClick={ this.handleClick }
+                >
+                  { cate.strCategory }
+
+                </button>
+              )) }
+            </div>
             <div className="cardContainer">
               { data.length === 1
                 ? (

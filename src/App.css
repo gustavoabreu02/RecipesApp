@@ -101,7 +101,7 @@
 }
 
 .color {
-  height: 820px;
+  height: 1300px;
 }
 
 .cardContainer {
@@ -139,37 +139,31 @@
   justify-content: space-around;
 }
 
-/* .headerContainerTwo, a {
-  padding-left: -30px;
-  padding-right: 80px;
-} */
-
 .profileContainer {
   align-items: center;
-  background: #c2e0f0;
   display: flex;
   flex-direction: column;
+  font-size: x-large;
   font-weight: 900;
-  padding: 5px;
+  padding: 10px;
 }
 
 .btnContainer {
   align-items: center;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
   padding: 2%;
   width: 100%;
 }
 
-/* .headerContainerDandF {
-  align-content: space-around;
-  background: #c2e0f0;
-  display: flex;
-  flex-direction: row;
-  font-size: medium;
-  padding: 0;
-} */
+.pBtn {
+  background-color: #c2e0f0;
+  border: 1px solid #464646;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
 
 .doneContainer {
   align-content: space-around;
@@ -197,6 +191,15 @@
 .finishRecipeBtn {
   bottom: 0;
   position: fixed;
+}
+
+.recipeBtnC {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: smaller;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .scrollmenu {

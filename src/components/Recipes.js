@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ComponentDrinks from '../components/ComponentDrinks';
-import ComponentFoods from '../components/ComponentFoods';
+import ComponentDrinks from './ComponentDrinks';
+import ComponentFoods from './ComponentFoods';
 /* import Header from '../components/Header'; */
 
 class Recipes extends React.Component {

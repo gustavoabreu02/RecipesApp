@@ -3,17 +3,18 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
 import App from '../App';
-// import fetch from '../../cypress/mocks/fetch';
-import moch from './moch';
+import fetch from '../../cypress/mocks/fetch';
+// import moch from './moch';
 
 const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(moch);
+    .mockImplementation(fetch);
 };
 
 const idSearchInput = 'search-input';
 const idSearchBtn = 'exec-search-btn';
 const lupa = 'search-top-btn';
+const btnFirst = 'first-letter-search-radio';
 
 describe('SearchBar', () => {
   beforeEach(mockFetch);
@@ -28,6 +29,7 @@ describe('SearchBar', () => {
       drinkIngredient: { drinks: [] },
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/drinks');
     const searchBtn = screen.getByTestId(lupa);
@@ -51,6 +53,7 @@ describe('SearchBar', () => {
       drinkIngredient: { drinks: [] },
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const searchBtn = screen.getByTestId(lupa);
@@ -64,7 +67,7 @@ describe('SearchBar', () => {
 
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
-    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
+    // expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
   });
   test('Teste se busca um elemento ingredient', () => {
     const INITIAL_STATE = {
@@ -75,6 +78,7 @@ describe('SearchBar', () => {
       drinkIngredient: { drinks: [] },
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const searchBtn = screen.getByTestId(lupa);
@@ -98,6 +102,7 @@ describe('SearchBar', () => {
       drinkIngredient: { drinks: [] },
       nameDrink: { drinks: [] },
       firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const searchBtn = screen.getByTestId(lupa);
@@ -106,10 +111,40 @@ describe('SearchBar', () => {
     expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
     userEvent.type(screen.queryByTestId(idSearchInput), 'c');
 
-    const filterFirstLetter = screen.queryByTestId('first-letter-search-radio');
+    const filterFirstLetter = screen.queryByTestId(btnFirst);
     userEvent.click(filterFirstLetter);
 
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
+  });
+  test.only('Teste se busca um elemento alert', () => {
+    const INITIAL_STATE = {
+      ingredient: { meals: [] },
+      name: { meals: [] },
+      firstLetter: { meals: [] },
+      searchValue: '',
+      drinkIngredient: { drinks: [] },
+      nameDrink: { drinks: [] },
+      firstLetterDrinks: { drinks: [] },
+      typeSearch: false,
+    };
+    // const alertMoch = jest.spyOn(window, 'alert').mockImplementation();
+    // global.alert = jest.fn();
+    window.alert = jest.fn();
+    renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    const searchBtn = screen.getByTestId(lupa);
+
+    userEvent.click(searchBtn);
+    expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId(idSearchInput), 'cc'); // xablau tem como exemplo
+
+    const filterFirstLetter = screen.queryByTestId(btnFirst);
+    userEvent.click(filterFirstLetter);
+
+    const search = screen.queryByTestId(idSearchBtn);
+    userEvent.click(search);
+    // expect(alert).toBeCalledTimes(1);
+    // expect(global.alert).toBeCalledTimes(1);
+    expect(window.alert.mock.calls.length).toBe(1);
   });
 });
