@@ -128,7 +128,6 @@ class DetailsDrinks extends React.Component {
         </ul>
         <p data-testid="instructions">{ data.strInstructions }</p>
         {/** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */}
-        {/* Youtube será encapsulado por ternário só tem em foods, manter o comentário de cima */}
         <YouTube
           data-testid="video"
           videoId={ data.strYoutube } /* puxar video da api de acordo com lógica */
@@ -156,10 +155,8 @@ class DetailsDrinks extends React.Component {
                   data-testid={ `${i1}-recomendation-title` }
                 >
                   { recipe.strMeal }
-
                 </p>
               </div>
-
             )) }
         </div>
         { buttonFavorite && (

@@ -63,8 +63,9 @@ class Drinks extends React.Component {
           <ComponentDrinks />
         ) : (
           <div>
-            <div className="recipeContainer">
+            <div className="recipeBtnD">
               <button
+                className="dBtn"
                 type="button"
                 data-testid="All-category-filter"
                 onClick={ this.handleClickButtonAll }
@@ -73,6 +74,7 @@ class Drinks extends React.Component {
               </button>
               { category.drinks.filter((cate, i) => i <= numberFilter).map((cate, i) => (
                 <button
+                  className="dBtn"
                   name={ cate.strCategory }
                   data-testid={ `${cate.strCategory}-category-filter` }
                   key={ i }

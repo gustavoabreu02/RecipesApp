@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
@@ -33,8 +34,6 @@ class FoodsInProgress extends React.Component {
 
   render() {
     const { data, ingredientFeito } = this.state;
-    console.log(ingredientFeito);
-    /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
     return (
       <div>
         <img
@@ -89,15 +88,17 @@ class FoodsInProgress extends React.Component {
             )) }
         </ul>
         <p data-testid="instructions">{ data.strInstructions }</p>
-        {/** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */}
-        {/* Youtube será encapsulado por ternário só tem em foods, manter o comentário de cima */}
-        <button
-          className="finishRecipeBtn"
-          data-testid="finish-recipe-btn"
-          type="button"
-        >
-          Finish Recipe
-        </button>
+
+        <Link to="/done-recipes">
+          <button
+            className="finishRecipeBtn"
+            data-testid="finish-recipe-btn"
+            type="button"
+            disabled={ !ingredientFeito.le }
+          >
+            Finish Recipe
+          </button>
+        </Link>
       </div>
     );
   }
@@ -116,3 +117,5 @@ FoodsInProgress.propTypes = {
 };
 
 export default connect()(FoodsInProgress);
+
+// Fazer css

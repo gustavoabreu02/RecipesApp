@@ -101,7 +101,7 @@
 }
 
 .color {
-  height: 1300px;
+  height: 1500px;
 }
 
 .cardContainer {
@@ -193,13 +193,29 @@
   position: fixed;
 }
 
-.recipeBtnC {
+.recipeBtnF {
   align-items: center;
   display: flex;
   flex-direction: row;
   font-size: smaller;
   justify-content: space-around;
   width: 100%;
+}
+
+.recipeBtnD {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.dBtn {
+  background-color: #c2e0f0;
+  border: 1px solid #464646;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 .scrollmenu {

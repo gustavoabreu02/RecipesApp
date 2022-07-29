@@ -117,7 +117,7 @@ class DetailsFoods extends React.Component {
         </button>
         <h3 data-testid="recipe-category">{data.strCategory}</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}
-        <ul data-testid="index-ingredient-name-and-measure">
+        <ul>
           { Object.keys(data).filter((recipe) => recipe.includes('strIngredient'))
             .map((recipe, index) => (
               data[recipe] && (
@@ -132,10 +132,9 @@ class DetailsFoods extends React.Component {
         </ul>
         <p data-testid="instructions">{ data.strInstructions }</p>
         {/** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */}
-        {/* Youtube será encapsulado por ternário só tem em foods, manter o comentário de cima */}
         <div data-testid="video">
           <YouTube
-            videoId={ data.strYoutube } /* puxar video da api de acordo com lógica */
+            videoId={ data.strYoutube }
             opts={ opts }
             onReady={ this.pause }
           />

@@ -3,12 +3,16 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
 import App from '../App';
-import fetch from '../../cypress/mocks/fetch';
-// import moch from './moch';
+// import fetch from '../../cypress/mocks/fetch';
+import mock from './mock';
 
 const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(fetch);
+    .mockImplementation(mock);
+  /* .mockImplementation((url) => {
+      console.log(url);
+      return global.fetch(url);
+    }); */
 };
 
 const idSearchInput = 'search-input';
@@ -56,6 +60,7 @@ describe('SearchBar', () => {
       typeSearch: false,
     };
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
     const searchBtn = screen.getByTestId(lupa);
 
     userEvent.click(searchBtn);
@@ -67,8 +72,9 @@ describe('SearchBar', () => {
 
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
-    // expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
   });
+
   test('Teste se busca um elemento ingredient', () => {
     const INITIAL_STATE = {
       ingredient: { meals: [] },
@@ -93,6 +99,7 @@ describe('SearchBar', () => {
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
   });
+
   test('Teste se busca um elemento first letter', () => {
     const INITIAL_STATE = {
       ingredient: { meals: [] },
@@ -118,7 +125,7 @@ describe('SearchBar', () => {
     userEvent.click(search);
   });
   test.only('Teste se busca um elemento alert', () => {
-    const INITIAL_STATE = {
+    /* const INITIAL_STATE = {
       ingredient: { meals: [] },
       name: { meals: [] },
       firstLetter: { meals: [] },
@@ -128,9 +135,7 @@ describe('SearchBar', () => {
       firstLetterDrinks: { drinks: [] },
       typeSearch: false,
     };
-    // const alertMoch = jest.spyOn(window, 'alert').mockImplementation();
-    // global.alert = jest.fn();
-    window.alert = jest.fn();
+    global.alert = jest.fn(console.log);
     renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
     const searchBtn = screen.getByTestId(lupa);
 
@@ -143,8 +148,6 @@ describe('SearchBar', () => {
 
     const search = screen.queryByTestId(idSearchBtn);
     userEvent.click(search);
-    // expect(alert).toBeCalledTimes(1);
-    // expect(global.alert).toBeCalledTimes(1);
-    expect(window.alert.mock.calls.length).toBe(1);
+    expect(global.alert).toBeCalledTimes(1); */
   });
 });
