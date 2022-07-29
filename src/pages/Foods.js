@@ -60,7 +60,7 @@ class Foods extends React.Component {
           <ComponentFoods />
         ) : (
           <div>
-            <div className="recipeBtnC">
+            <div className="recipeBtnF">
               <button
                 className="sBtn"
                 type="button"
