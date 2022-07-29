@@ -34,7 +34,6 @@ class FoodsInProgress extends React.Component {
 
   render() {
     const { data, ingredientFeito } = this.state;
-
     return (
       <div>
         <img
