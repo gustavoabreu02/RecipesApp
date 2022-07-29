@@ -27,7 +27,7 @@ class DrinksInProgress extends React.Component {
 
   render() {
     const { data } = this.state;
-
+    
     return (
       <div>
         <img

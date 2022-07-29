@@ -89,13 +89,13 @@ class FoodsInProgress extends React.Component {
             )) }
         </ul>
         <p data-testid="instructions">{ data.strInstructions }</p>
+
         <Link to="/done-recipes">
           <button
             className="finishRecipeBtn"
             data-testid="finish-recipe-btn"
             type="button"
             disabled={ !ingredientFeito.le }
-
           >
             Finish Recipe
           </button>
