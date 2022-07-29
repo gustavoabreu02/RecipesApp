@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import DetailsFoods from './DetailsFoods';
 import DetailsDrinks from './DetailsDrinks';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
@@ -14,15 +15,15 @@ class RecipeDetails extends React.Component {
     event.target.pauseVideo();
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { match, location } = this.props;
     if (location.pathname.includes('/foods')) {
-      fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${match.params.id}`)
+      await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${match.params.id}`)
         .then((response) => response.json())
         .then((data) => this.setState({ data: data.meals[0] }));
     }
     if (location.pathname.includes('/drinks')) {
-      fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${match.params.id}`)
+      await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${match.params.id}`)
         .then((response) => response.json())
         .then((data) => this.setState({ data: data.drinks[0] }));
     }
@@ -50,6 +51,7 @@ RecipeDetails.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+
 };
 
-export default RecipeDetails;
+export default connect()(RecipeDetails);

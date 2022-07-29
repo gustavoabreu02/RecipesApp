@@ -3,13 +3,34 @@ import PropTypes from 'prop-types';
 import { createBrowserHistory } from 'history';
 import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
 
+const copy = require('clipboard-copy');
+
 class DetailsDrinks extends React.Component {
+  constructor() {
+    super();
+    if (localStorage.getItem('inProgressRecipes') === null) {
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify({ cocktails: {
+          'id-da-bebida': ['lista-de-ingredientes-bebidas'],
+        },
+        meals: {
+          'id-da-comida': ['lista-de-ingredientes-comidas'],
+        } }));
+    }
+    if (localStorage.getItem('doneRecipes') === null) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+  }
+
     state = {
       recomendações: [],
+      buttonFavorite: true,
+      copied: false,
     }
 
   pause = (event) => {
@@ -17,16 +38,41 @@ class DetailsDrinks extends React.Component {
   }
 
   componentDidMount = () => {
+    const { data } = this.props;
+    const recipeFavorite = localStorage.getItem('doneRecipes');
+    if (JSON.parse(recipeFavorite).some((recipe) => recipe.id === data.idDrink)) {
+      this.setState({
+        buttonFavorite: false,
+      });
+    }
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((recomendações) => this.setState({ recomendações: recomendações.meals }));
   }
 
+  copy = (type, id) => {
+    copy(`http://localhost:3000/${type}/${id}`);
+    this.setState({
+      copied: true,
+    });
+  }
+
+  startRecipeOrNot = () => {
+    const { data } = this.props;
+    const startRecipesJson = localStorage.getItem('inProgressRecipes');
+    const startRecipes = JSON.parse(startRecipesJson);
+    if (Object.keys(startRecipes
+      .cocktails).some((idRecipe) => idRecipe === data.idDrink)) {
+      return true;
+    }
+  }
+
   render() {
     const number = 5;
     const { data } = this.props;
-    const { recomendações } = this.state;
-
+    const { recomendações, buttonFavorite, copied } = this.state;
+    const history = createBrowserHistory();
+    const { location: { pathname } } = history;
     /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
     const opts = {
       height: '390',
@@ -35,9 +81,6 @@ class DetailsDrinks extends React.Component {
         autoplay: 1,
       },
     };
-
-    const history = createBrowserHistory();
-    const { location: { pathname } } = history;
 
     return (
       <div>
@@ -53,9 +96,13 @@ class DetailsDrinks extends React.Component {
           data-testid="share-btn"
           type="button"
           src={ shareIcon }
+          onClick={ () => this.copy('drinks', data.idDrink) }
         >
           <img src={ shareIcon } alt="lupa" />
         </button>
+        { copied ? (
+          <p>Link copied!</p>
+        ) : '' }
         <button
           data-testid="favorite-btn"
           type="button"
@@ -115,22 +162,45 @@ class DetailsDrinks extends React.Component {
 
             )) }
         </div>
-        <Link to={ `${pathname}/in-progress` }>
-          <button
-            className="startRecipeBtn"
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Start Recipe
-          </button>
-        </Link>
+        { buttonFavorite && (
+          <Link to={ `${pathname}/in-progress` }>
+            <button
+              className="startRecipeBtn"
+              data-testid="start-recipe-btn"
+              type="button"
+              onClick={ async () => {
+                localStorage.setItem('doneRecipes', JSON.stringify([{
+                  id: data.idDrink,
+                  type: 'Drink',
+                  nationality: data.strArea,
+                  category: data.strCategory,
+                  alcoholicOrNot: data.strAlcoholic,
+                  name: data.strDrink,
+                  image: data.strDrinkThumb,
+                  doneDate: new Date(),
+                  tags: [data.strTags],
+                }]));
+                const driksStorage = JSON
+                  .parse(localStorage.getItem('inProgressRecipes'));
+                driksStorage.cocktails[data.idDrink] = Object.entries(data)
+                  .filter((recipe) => recipe[0]
+                    .includes('strIngredient') && recipe[1] != null)
+                  .map((recipe) => recipe[1]);
+                localStorage
+                  .setItem('inProgressRecipes', JSON.stringify(driksStorage));
+              } }
+            >
+              { this.startRecipeOrNot() ? 'Continue Recipe' : 'Start Recipe' }
+            </button>
+          </Link>
+        ) }
       </div>
     );
   }
 }
 
 DetailsDrinks.propTypes = {
-  data: PropTypes.objectOf().isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default DetailsDrinks;
+export default connect()(DetailsDrinks);
