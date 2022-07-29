@@ -131,7 +131,7 @@ class DetailsDrinks extends React.Component {
         {/* Youtube será encapsulado por ternário só tem em foods, manter o comentário de cima */}
         <YouTube
           data-testid="video"
-          videoId={ data.strYoutube } /* puxar video da api de acordo com lógicaa */
+          videoId={ data.strYoutube } /* puxar video da api de acordo com lógica */
           opts={ opts }
           onReady={ this.pause }
         />
