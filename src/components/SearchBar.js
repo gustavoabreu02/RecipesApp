@@ -71,6 +71,7 @@ class SearchBar extends React.Component {
      }
    };
 
+   // então trocar para um if antes da api, se for mais de um caracter nem vai pra api
    getDrinksByFirstLetter = async (primeiraLetra) => {
      const { dispatch } = this.props;
      try {

@@ -18,7 +18,9 @@ class Foods extends React.Component {
   componentDidMount = async () => {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
-      .then((data) => this.setState({ dataInicial: data.meals, data: data.meals }));
+      .then((data) => {
+        this.setState({ dataInicial: data.meals, data: data.meals });
+      });
     fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
       .then((response) => response.json())
       .then((category) => this.setState({ category }));
@@ -139,6 +141,8 @@ Foods.propTypes = {
 const mapStateToProps = (state) => ({
   typeSearch: state.foodsReducer.typeSearch,
 });
+
+// fazer mapDispatch para passar o resultado do fetch para o estado global
 
 export default connect(mapStateToProps)(Foods);
 

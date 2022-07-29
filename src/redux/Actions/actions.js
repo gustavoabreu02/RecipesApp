@@ -9,7 +9,8 @@ const SEARCH_NAME = 'SEARCH_NAME';
 const SEARCH_LETTER = 'SEARCH_LETTER';
 const TYPE_SEARCH = 'TYPE_SEARCH';
 export { ADD_USER, ERROR_REQUEST, FIRST_LETTER, ADD_INGREDIENT, ADD_BYNAME
-  , ADD_SEARCH_VALUE, SEARCH_INGREDIENT, SEARCH_NAME, SEARCH_LETTER, TYPE_SEARCH };
+  , ADD_SEARCH_VALUE,
+  SEARCH_INGREDIENT, SEARCH_NAME, SEARCH_LETTER, TYPE_SEARCH };
 export const getUserEmail = (email) => ({ type: ADD_USER, email });
 export const errorRequest = (error) => ({ type: ERROR_REQUEST, error });
 export const getFoodByLetter = (first) => ({ type: FIRST_LETTER, first });

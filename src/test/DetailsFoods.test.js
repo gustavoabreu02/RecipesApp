@@ -1,8 +1,8 @@
-import React from 'react';
+/* import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouterAndRedux';
-import App from '../App';
+import App from '../App'; */
 import fetch from '../../cypress/mocks/fetch';
 
 const mockFetch = () => {
@@ -10,7 +10,7 @@ const mockFetch = () => {
     .mockImplementation(fetch);
 };
 
-const pathToPage = () => {
+/* const pathToPage = () => {
   const INITIAL_STATE = {
     ingredient: { meals: [] },
     name: { meals: [] },
@@ -35,14 +35,14 @@ const pathToPage = () => {
   userEvent.click(search);
   globalHistory.push('/foods/53013');
   expect(globalHistory.location.pathname).toBe('/foods/53013');
-};
+}; */
 
 describe('DetailsFoods', () => {
   beforeEach(mockFetch, pathToPage);
   afterEach(() => jest.clearAllMocks());
 
-  /*  test('Teste se há os elementos do Search Bar', () => {
-    const headImg = screen.findByTestId('recipe-photo');
+  test('Teste se há os elementos do Search Bar', () => {
+    /*  const headImg = screen.findByTestId('recipe-photo');
     const title = screen.findByTestId('recipe-title');
     const shareIconBtn = screen.findByTestId('share-btn');
     const favoriteIconBtn = screen.findByTestId('favorite-btn');
@@ -68,6 +68,6 @@ describe('DetailsFoods', () => {
     expect(imgCard).toBeInTheDocument();
     expect(nameCard).toBeInTheDocument();
     expect(titleCard).toBeInTheDocument();
-    expect(redirectLink).toBeInTheDocument();
-  }); */
+    expect(redirectLink).toBeInTheDocument(); */
+  });
 });
