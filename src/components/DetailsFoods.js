@@ -25,6 +25,9 @@ class DetailsFoods extends React.Component {
     if (localStorage.getItem('doneRecipes') === null) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
     }
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
   }
 
   state = {
@@ -111,7 +114,17 @@ class DetailsFoods extends React.Component {
           data-testid="favorite-btn"
           type="button"
           src="a" /* nome da função com o if ou ternário buscando os corações black e white */
-          /* onClick={ this.showInput } */
+          onClick={ async () => {
+            localStorage.setItem('favoriteRecipes', JSON.stringify([{
+              id: data.idMeal,
+              type: 'food',
+              nationality: data.strArea,
+              category: data.strCategory,
+              alcoholicOrNot: '',
+              name: data.strMeal,
+              image: data.strMealThumb,
+            }]));
+          } }
         >
           {/* <img src={ nomeGenerico } alt="lupa" /> */}
         </button>
