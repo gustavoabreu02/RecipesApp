@@ -6,7 +6,7 @@ import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
 
 const copy = require('clipboard-copy');
 
@@ -34,6 +34,7 @@ class DetailsFoods extends React.Component {
     recomendações: [],
     buttonFavorite: true,
     copied: false,
+    /* favoriteRecipe: false, */
   }
 
   pause = (event) => {
@@ -76,7 +77,7 @@ class DetailsFoods extends React.Component {
   render() {
     const number = 5;
     const { data } = this.props;
-    const { recomendações, buttonFavorite, copied } = this.state;
+    const { recomendações, buttonFavorite, copied/* , favoriteRecipe */ } = this.state;
     const history = createBrowserHistory();
     const { location: { pathname } } = history;
 
@@ -110,10 +111,11 @@ class DetailsFoods extends React.Component {
         { copied ? (
           <p>Link copied!</p>
         ) : '' }
+        {/* {favoriteRecipe ? ( */}
         <button
           data-testid="favorite-btn"
           type="button"
-          src="a" /* nome da função com o if ou ternário buscando os corações black e white */
+          src={ whiteHeartIcon }
           onClick={ async () => {
             localStorage.setItem('favoriteRecipes', JSON.stringify([{
               id: data.idMeal,
@@ -126,8 +128,28 @@ class DetailsFoods extends React.Component {
             }]));
           } }
         >
-          {/* <img src={ nomeGenerico } alt="lupa" /> */}
+          <img src={ whiteHeartIcon } alt="empty" />
         </button>
+        {/* ) : (
+          <button
+            data-testid="favorite-btn"
+            type="button"
+            src={ blackHeartIcon }
+            onClick={ async () => {
+              localStorage.setItem('favoriteRecipes', JSON.stringify([{
+                id: data.idMeal,
+                type: 'food',
+                nationality: data.strArea,
+                category: data.strCategory,
+                alcoholicOrNot: '',
+                name: data.strMeal,
+                image: data.strMealThumb,
+              }]));
+            } }
+          >
+            <img src={ blackHeartIcon } alt="full" />
+          </button>
+        )} */}
         <h3 data-testid="recipe-category">{data.strCategory}</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}
         <ul>

@@ -3,7 +3,7 @@ import App from '../App';
 import renderWithRouter from '../renderWithRouterAndRedux';
 
 describe('Testa a Recipes', () => {
-  test('Testa a tela drinks', () => {
+  test('Testa se há os itens no componente', () => {
     const INITIAL_STATE = {
       ingredient: { meals: [] },
       name: { meals: [] },

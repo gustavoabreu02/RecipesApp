@@ -1,16 +1,16 @@
-/* import React from 'react';
-import { screen } from '@testing-library/react';
+import React from 'react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from '../renderWithRouterAndRedux';
-import App from '../App'; */
-import fetch from '../../cypress/mocks/fetch';
+import renderWithRouterAndRedux from '../renderWithRouterAndRedux';
+import App from '../App';
+import mock from './mock';
 
-const mockFetch = () => {
+/* const mockFetch = () => {
   jest.spyOn(global, 'fetch')
-    .mockImplementation(fetch);
-};
+    .mockImplementation(mock);
+}; */
 
-/* const pathToPage = () => {
+const pathToPage = async () => {
   const INITIAL_STATE = {
     ingredient: { meals: [] },
     name: { meals: [] },
@@ -21,28 +21,30 @@ const mockFetch = () => {
     firstLetterDrinks: { drinks: [] },
     typeSearch: false,
   };
-  renderWithRouter(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+  const { history } = renderWithRouterAndRedux(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
   const searchBtn = screen.getByTestId('search-top-btn');
   userEvent.click(searchBtn);
 
-  expect(screen.queryByTestId(idSearchInput)).toBeInTheDocument();
-  userEvent.type(screen.queryByTestId(idSearchInput), 'big mac');
+  let serchInput = screen.getByTestId('search-input')
+  expect(serchInput).toBeInTheDocument();
+  userEvent.type(serchInput, 'big mac');
 
-  const filterName = screen.queryByTestId('name-search-radio');
+  const filterName = screen.getByTestId('name-search-radio');
   userEvent.click(filterName);
 
-  const search = screen.queryByTestId('exec-search-btn');
+  const search = screen.getByTestId('exec-search-btn');
   userEvent.click(search);
-  globalHistory.push('/foods/53013');
-  expect(globalHistory.location.pathname).toBe('/foods/53013');
-}; */
+  // globalHistory.push('/foods/53013');
+  await waitFor(() => expect(history.location.pathname).toBe('/foods/53013'), {timeout: 3000});
+};
 
 describe('DetailsFoods', () => {
-  beforeEach(mockFetch, pathToPage);
+  beforeEach(() => pathToPage())
+  //beforeEach(mockFetch, pathToPage);
   afterEach(() => jest.clearAllMocks());
 
   test('Teste se há os elementos do Search Bar', () => {
-    /*  const headImg = screen.findByTestId('recipe-photo');
+    /* const headImg = screen.findByTestId('recipe-photo');
     const title = screen.findByTestId('recipe-title');
     const shareIconBtn = screen.findByTestId('share-btn');
     const favoriteIconBtn = screen.findByTestId('favorite-btn');

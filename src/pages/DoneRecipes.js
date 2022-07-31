@@ -21,7 +21,7 @@ class DoneRecipes extends React.Component {
     return (
       <div>
         <Header title="Done Recipes" />
-        <button
+        {/*  <button
           data-testid="filter-by-all-btn"
           type="button"
         >
@@ -55,7 +55,7 @@ class DoneRecipes extends React.Component {
         </button>
         <h3 data-testid="index-horizontal-name">{recipeName}</h3>
         <p data-testid="index-horizontal-done-date">{finishRecipeData}</p>
-        <p data-testid="index-tagName-horizontal-tag">{finishRecipeData}</p>
+        <p data-testid="index-tagName-horizontal-tag">{finishRecipeData}</p> */}
       </div>
     );
   }

@@ -18,7 +18,9 @@ class Drinks extends React.Component {
   componentDidMount = async () => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
-      .then((data) => this.setState({ dataInicial: data.drinks, data: data.drinks }));
+      .then((data) => {
+        this.setState({ dataInicial: data.drinks, data: data.drinks });
+      });
     fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
       .then((response) => response.json())
       .then((category) => this.setState({ category }));
