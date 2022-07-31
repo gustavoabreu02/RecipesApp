@@ -3,7 +3,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndRedux from '../renderWithRouterAndRedux';
 import App from '../App';
-import mock from './mock';
+// import mock from './mock';
 
 /* const mockFetch = () => {
   jest.spyOn(global, 'fetch')
@@ -21,11 +21,12 @@ const pathToPage = async () => {
     firstLetterDrinks: { drinks: [] },
     typeSearch: false,
   };
-  const { history } = renderWithRouterAndRedux(<App />, { foodsReducer: INITIAL_STATE }, '/foods');
+  const { history } = renderWithRouterAndRedux(<App />,
+    { foodsReducer: INITIAL_STATE }, '/foods');
   const searchBtn = screen.getByTestId('search-top-btn');
   userEvent.click(searchBtn);
 
-  let serchInput = screen.getByTestId('search-input')
+  const serchInput = screen.getByTestId('search-input');
   expect(serchInput).toBeInTheDocument();
   userEvent.type(serchInput, 'big mac');
 
@@ -35,12 +36,13 @@ const pathToPage = async () => {
   const search = screen.getByTestId('exec-search-btn');
   userEvent.click(search);
   // globalHistory.push('/foods/53013');
-  await waitFor(() => expect(history.location.pathname).toBe('/foods/53013'), {timeout: 3000});
+  await waitFor(() => expect(history.location.pathname).toBe('/foods/53013'),
+    { timeout: 3000 });
 };
 
 describe('DetailsFoods', () => {
-  beforeEach(() => pathToPage())
-  //beforeEach(mockFetch, pathToPage);
+  beforeEach(() => pathToPage());
+  // beforeEach(mockFetch, pathToPage);
   afterEach(() => jest.clearAllMocks());
 
   test('Teste se há os elementos do Search Bar', () => {

@@ -1,5 +1,5 @@
-import meals from './FoodsMock';
-import drinks from './DrinksMock';
+import meals from '../../cypress/mocks/meals';
+import drinks from '../../cypress/mocks/drinks';
 
 const mealsDoc = meals;
 const drinksDoc = drinks;

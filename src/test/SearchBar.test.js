@@ -1,10 +1,9 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouterAndRedux from '../renderWithRouterAndRedux';
 import App from '../App';
 import mock from './mock';
-import renderWithRouterAndRedux from '../renderWithRouterAndRedux';
-
 
 const idSearchInput = 'search-input';
 const idSearchBtn = 'exec-search-btn';
