@@ -25,6 +25,9 @@ class DetailsDrinks extends React.Component {
     if (localStorage.getItem('doneRecipes') === null) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
     }
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
   }
 
     state = {
@@ -47,7 +50,9 @@ class DetailsDrinks extends React.Component {
     }
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
-      .then((recomendações) => this.setState({ recomendações: recomendações.meals }));
+      .then((recomendações) => {
+        this.setState({ recomendações: recomendações.meals });
+      });
   }
 
   copy = (type, id) => {
@@ -107,7 +112,19 @@ class DetailsDrinks extends React.Component {
           data-testid="favorite-btn"
           type="button"
           src="a" /* nome da função com o if ou ternário buscando os corações black e white */
-          /* onClick={ this.showInput } */
+          onClick={ () => {
+            const favRecipe = JSON
+              .parse(localStorage.getItem('favoriteRecipes'));
+            localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipe, {
+              id: data.idDrink,
+              type: 'drink',
+              nationality: '',
+              category: data.strCategory,
+              alcoholicOrNot: data.strAlcoholic,
+              name: data.strDrink,
+              image: data.strDrinkThumb,
+            }]));
+          } }
         >
           {/* <img src={ nomeGenerico } alt="lupa" /> */}
         </button>

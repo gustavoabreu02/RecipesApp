@@ -35,7 +35,22 @@ const cocoaDrinks = {
     idDrink: '12734',
   }] };
 
-const mock = (url) => Promise.resolve({
+const ordinaryDrinks = {
+  drinks: [{
+    strDrink: 'Cherry Rum',
+    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/twsuvr1441554424.jpg',
+    idDrink: '11239',
+  }] };
+
+const cocktailDrinks = {
+  drinks: [{
+    strDrink: 'Tequila Sunrise',
+    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/quqyqp1480879103.jpg',
+    idDrink: '13621',
+  }] };
+
+/* const mock = (url) => Promise.resolve({
+  jest.spyOn(global, )
   status: 200,
   ok: true,
   json: () => {
@@ -44,8 +59,27 @@ const mock = (url) => Promise.resolve({
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=chocolate') { return Promise.resolve(dessertMeals); }
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=') { return Promise.resolve(drinksDoc); }
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') { return Promise.resolve(typeDrinks); }
-    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=chocolate') { return Promise.resolve(cocoaDrinks); }
+    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=chocolate') { return Promise.resolve(cocoaDrinks); }
+    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=c') { return Promise.resolve(ordinaryDrinks); }
+    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=tequila') { return Promise.resolve(cocktailDrinks); }
+    // https://www.themealdb.com/api/json/v1/1/search.php?s=big%20mac
+    // https://www.themealdb.com/api/json/v1/1/lookup.php?i=53013
   },
-});
+}); */
 
-module.exports = mock;
+const mock = jest.spyOn(global, 'fetch')
+  .mockImplementation((url) => Promise.resolve({
+    json: async () => {
+      if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=') return mealsDoc;
+      if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') return typeMeals;
+      if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=chocolate') return dessertMeals;
+      if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=') return drinksDoc;
+      if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') return typeDrinks;
+      if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=chocolate') return cocoaDrinks;
+      if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=c') return ordinaryDrinks;
+      if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=tequila') return cocktailDrinks;
+      // https://www.themealdb.com/api/json/v1/1/search.php?s=big%20mac
+      // https://www.themealdb.com/api/json/v1/1/lookup.php?i=53013
+    } }));
+
+export default mock;

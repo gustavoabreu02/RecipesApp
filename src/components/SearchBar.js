@@ -74,14 +74,17 @@ class SearchBar extends React.Component {
    // então trocar para um if antes da api, se for mais de um caracter nem vai pra api
    getDrinksByFirstLetter = async (primeiraLetra) => {
      const { dispatch } = this.props;
-     try {
-       const endpoint = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`);
-       const getDrinkByFirstLetter = await endpoint.json();
-       dispatch(getDrinkByLetter(getDrinkByFirstLetter));
-     } catch (error) {
+     if (primeiraLetra.length > 1) {
+       global.alert('Your search must have only 1 (one) character');
+       dispatch(errorRequest);
+     }
+     const endpoint = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`);
+     const getDrinkByFirstLetter = await endpoint.json();
+     dispatch(getDrinkByLetter(getDrinkByFirstLetter));
+     /* } catch (error) {
        global.alert('Your search must have only 1 (one) character');
        dispatch(errorRequest(error));
-     }
+     } */
    };
 
   handleClick = ({ target }) => {
@@ -159,11 +162,14 @@ class SearchBar extends React.Component {
     );
   }
 }
+
 SearchBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
 };
+
 const mapStateToProps = (state) => ({
   searchValue: state.foodsReducer.searchValue,
 });
+
 export default connect(mapStateToProps)(SearchBar);
