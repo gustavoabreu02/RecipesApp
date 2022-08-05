@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
+import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
 import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
 
 const copy = require('clipboard-copy');
@@ -34,6 +34,7 @@ class DetailsFoods extends React.Component {
     recomendações: [],
     buttonFavorite: true,
     copied: false,
+    srcFavorite: false,
     /* favoriteRecipe: false, */
   }
 
@@ -42,6 +43,8 @@ class DetailsFoods extends React.Component {
   }
 
   componentDidMount = () => {
+    const history = createBrowserHistory();
+    const { location: { pathname } } = history;
     const { data } = this.props;
     const recipeFavorite = localStorage.getItem('doneRecipes');
     if (
@@ -55,6 +58,15 @@ class DetailsFoods extends React.Component {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((recomendações) => this.setState({ recomendações: recomendações.drinks }));
+    const favorite = localStorage.getItem('favoriteRecipes');
+    console.log(pathname.split('/')[2]);
+    JSON.parse(favorite).forEach((recipe) => {
+      if ([recipe.id].includes(pathname.split('/')[2])) {
+        this.setState({
+          srcFavorite: true,
+        });
+      }
+    });
   }
 
   copy = (type, id) => {
@@ -77,7 +89,7 @@ class DetailsFoods extends React.Component {
   render() {
     const number = 5;
     const { data } = this.props;
-    const { recomendações, buttonFavorite, copied/* , favoriteRecipe */ } = this.state;
+    const { recomendações, buttonFavorite, copied, srcFavorite } = this.state;
     const history = createBrowserHistory();
     const { location: { pathname } } = history;
 
@@ -115,9 +127,14 @@ class DetailsFoods extends React.Component {
         <button
           data-testid="favorite-btn"
           type="button"
-          src={ whiteHeartIcon }
-          onClick={ async () => {
-            localStorage.setItem('favoriteRecipes', JSON.stringify([{
+          src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } /* nome da função com o if ou ternário buscando os corações black e white */
+          onClick={ () => {
+            this.setState({
+              srcFavorite: true,
+            });
+            const favRecipe = JSON
+              .parse(localStorage.getItem('favoriteRecipes'));
+            localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipe, {
               id: data.idMeal,
               type: 'food',
               nationality: data.strArea,
@@ -128,28 +145,8 @@ class DetailsFoods extends React.Component {
             }]));
           } }
         >
-          <img src={ whiteHeartIcon } alt="empty" />
+          <img src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } alt="lupa" />
         </button>
-        {/* ) : (
-          <button
-            data-testid="favorite-btn"
-            type="button"
-            src={ blackHeartIcon }
-            onClick={ async () => {
-              localStorage.setItem('favoriteRecipes', JSON.stringify([{
-                id: data.idMeal,
-                type: 'food',
-                nationality: data.strArea,
-                category: data.strCategory,
-                alcoholicOrNot: '',
-                name: data.strMeal,
-                image: data.strMealThumb,
-              }]));
-            } }
-          >
-            <img src={ blackHeartIcon } alt="full" />
-          </button>
-        )} */}
         <h3 data-testid="recipe-category">{data.strCategory}</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}
         <ul>
@@ -166,7 +163,6 @@ class DetailsFoods extends React.Component {
             )) }
         </ul>
         <p data-testid="instructions">{ data.strInstructions }</p>
-        {/** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */}
         <div data-testid="video">
           <YouTube
             videoId={ data.strYoutube }
@@ -195,10 +191,8 @@ class DetailsFoods extends React.Component {
                   data-testid={ `${i1}-recomendation-title` }
                 >
                   { recipe.strDrink }
-
                 </p>
               </div>
-
             )) }
         </div>
         { buttonFavorite && (

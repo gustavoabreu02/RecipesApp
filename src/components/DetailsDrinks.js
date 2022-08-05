@@ -5,8 +5,8 @@ import YouTube from 'react-youtube'; // rode o npm 'npm i react-youtube'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import shareIcon from '../images/shareIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
+import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
 
 const copy = require('clipboard-copy');
 
@@ -34,6 +34,7 @@ class DetailsDrinks extends React.Component {
       recomendações: [],
       buttonFavorite: true,
       copied: false,
+      srcFavorite: false,
     }
 
   pause = (event) => {
@@ -41,6 +42,8 @@ class DetailsDrinks extends React.Component {
   }
 
   componentDidMount = () => {
+    const history = createBrowserHistory();
+    const { location: { pathname } } = history;
     const { data } = this.props;
     const recipeFavorite = localStorage.getItem('doneRecipes');
     if (JSON.parse(recipeFavorite).some((recipe) => recipe.id === data.idDrink)) {
@@ -53,6 +56,15 @@ class DetailsDrinks extends React.Component {
       .then((recomendações) => {
         this.setState({ recomendações: recomendações.meals });
       });
+    const favorite = localStorage.getItem('favoriteRecipes');
+    console.log(pathname.split('/')[2]);
+    JSON.parse(favorite).forEach((recipe) => {
+      if ([recipe.id].includes(pathname.split('/')[2])) {
+        this.setState({
+          srcFavorite: true,
+        });
+      }
+    });
   }
 
   copy = (type, id) => {
@@ -75,7 +87,7 @@ class DetailsDrinks extends React.Component {
   render() {
     const number = 5;
     const { data } = this.props;
-    const { recomendações, buttonFavorite, copied } = this.state;
+    const { recomendações, buttonFavorite, copied, srcFavorite } = this.state;
     const history = createBrowserHistory();
     const { location: { pathname } } = history;
     /** Source: https://www.geeksforgeeks.org/how-to-add-youtube-videos-in-next-js/ consultado conforme indicado no Readme */
@@ -111,8 +123,11 @@ class DetailsDrinks extends React.Component {
         <button
           data-testid="favorite-btn"
           type="button"
-          src="a" /* nome da função com o if ou ternário buscando os corações black e white */
+          src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } /* nome da função com o if ou ternário buscando os corações black e white */
           onClick={ () => {
+            this.setState({
+              srcFavorite: true,
+            });
             const favRecipe = JSON
               .parse(localStorage.getItem('favoriteRecipes'));
             localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipe, {
@@ -126,7 +141,7 @@ class DetailsDrinks extends React.Component {
             }]));
           } }
         >
-          {/* <img src={ nomeGenerico } alt="lupa" /> */}
+          <img src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } alt="lupa" />
         </button>
         <h3 data-testid="recipe-category">{data.strAlcoholic}</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}

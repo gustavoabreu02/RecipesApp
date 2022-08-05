@@ -33,6 +33,8 @@ class FoodsInProgress extends React.Component {
   };
 
   render() {
+    const ingredient = localStorage.getItem('inProgressRecipes');
+    const a = false;
     const { data, ingredientFeito } = this.state;
     return (
       <div>
@@ -82,6 +84,17 @@ class FoodsInProgress extends React.Component {
                     id={ `${index}-ingredient-step` }
                     type="checkbox"
                     onChange={ this.handleChange }
+                    checked={ JSON.parse(ingredient)
+                      === `${data[`strMeasure${index + 1}`]} ${data[recipe]}` ? true
+                      : a }
+                    onClick={ () => {
+                      localStorage.setItem(
+                        'inProgressRecipes',
+                        JSON.stringify(
+                          `${data[`strMeasure${index + 1}`]} ${data[recipe]}`,
+                        ),
+                      );
+                    } }
                   />
                 </div>
               )

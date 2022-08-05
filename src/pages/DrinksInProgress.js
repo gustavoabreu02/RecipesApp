@@ -27,6 +27,8 @@ class DrinksInProgress extends React.Component {
 
   render() {
     const { data } = this.state;
+    const ingredient = localStorage.getItem('inProgressRecipes');
+    const a = false;
     return (
       <div>
         <img
@@ -63,7 +65,20 @@ class DrinksInProgress extends React.Component {
                   data-testid={ `${index}-ingredient-step` }
                 >
                   <p>{`${data[`strMeasure${index + 1}`]} ${data[recipe]}`}</p>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={ JSON.parse(ingredient)
+                      === `${data[`strMeasure${index + 1}`]} ${data[recipe]}` ? true
+                      : a }
+                    onClick={ () => {
+                      localStorage.setItem(
+                        'inProgressRecipes',
+                        JSON.stringify(
+                          `${data[`strMeasure${index + 1}`]} ${data[recipe]}`,
+                        ),
+                      );
+                    } }
+                  />
                 </div>
               )
             )) }
