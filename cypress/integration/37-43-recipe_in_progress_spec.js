@@ -148,7 +148,7 @@ describe('40 - Salve o estado do progresso, que deve ser mantido caso a pessoa a
   });
 });
 
-describe('41 - Desenvolva a lógica de favoritar e compartilhar. A lógica da tela de detalhes de uma receita se aplica aqui', () => {
+describe.only('41 - Desenvolva a lógica de favoritar e compartilhar. A lógica da tela de detalhes de uma receita se aplica aqui', () => {
   it('verifica se os botões estão disponíveis na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/foods/52771/in-progress', {
       onBeforeLoad(win) {
@@ -412,7 +412,7 @@ describe('41 - Desenvolva a lógica de favoritar e compartilhar. A lógica da te
   });
 });
 
-describe.only('42 - Implemente a solução de modo que o botão de finalizar receita (\"Finish Recipe\") só pode estar habilitado quando todos os ingredientes estiverem _\"checkados\"_ (marcados)', () => {
+describe('42 - Implemente a solução de modo que o botão de finalizar receita (\"Finish Recipe\") só pode estar habilitado quando todos os ingredientes estiverem _\"checkados\"_ (marcados)', () => {
   it('verifica se botão para finalizar está desabilitado em receitas de comidas', () => {
     cy.visit('http://localhost:3000/foods/52771/in-progress', {
       onBeforeLoad(win) {

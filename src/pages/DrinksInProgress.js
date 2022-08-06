@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
+import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+
+const copy = require('clipboard-copy');
 
 class DrinksInProgress extends React.Component {
   constructor(props) {
@@ -12,12 +14,17 @@ class DrinksInProgress extends React.Component {
     if (localStorage.getItem('ingredientsDrinks') === null) {
       localStorage.setItem('ingredientsDrinks', JSON.stringify({}));
     }
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
 
     this.state = {
       data: [],
       ingredientCheckbox: [],
       renderCheckbox: true,
       buttonFinish: {},
+      srcFavorite: false,
+      copied: false,
     };
   }
 
@@ -54,10 +61,26 @@ class DrinksInProgress extends React.Component {
           }));
         }
       });
+    const favorite = localStorage.getItem('favoriteRecipes');
+    JSON.parse(favorite).forEach((recipe) => {
+      if ([recipe.id].includes(location.pathname.split('/')[2])) {
+        this.setState({
+          srcFavorite: true,
+        });
+      }
+    });
   };
 
+  copy = (type, id) => {
+    copy(`http://localhost:3000/${type}/${id}`);
+    this.setState({
+      copied: true,
+    });
+  }
+
   render() {
-    const { data, ingredientCheckbox, renderCheckbox, buttonFinish } = this.state;
+    const { data, copied,
+      ingredientCheckbox, renderCheckbox, buttonFinish, srcFavorite } = this.state;
     const ingredientsDrinks = localStorage.getItem('ingredientsDrinks');
     const { location } = this.props;
     console.log(Object.values(buttonFinish));
@@ -75,16 +98,35 @@ class DrinksInProgress extends React.Component {
           data-testid="share-btn"
           type="button"
           src={ shareIcon }
+          onClick={ () => this.copy('drinks', data.idDrink) }
         >
           <img src={ shareIcon } alt="lupa" />
         </button>
+        { copied ? (
+          <p>Link copied!</p>
+        ) : '' }
         <button
           data-testid="favorite-btn"
           type="button"
-          /*  src={ nomeGenerico }  *//* nome da função com o if ou ternário buscando os corações black e white */
-          /* onClick={ this.showInput } */
+          src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } /* nome da função com o if ou ternário buscando os corações black e white */
+          onClick={ () => {
+            this.setState({
+              srcFavorite: !srcFavorite,
+            });
+            const favRecipe = JSON
+              .parse(localStorage.getItem('favoriteRecipes'));
+            localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipe, {
+              id: data.idDrink,
+              type: 'drink',
+              nationality: '',
+              category: data.strCategory,
+              alcoholicOrNot: data.strAlcoholic,
+              name: data.strDrink,
+              image: data.strDrinkThumb,
+            }]));
+          } }
         >
-          {/* <img src={ nomeGenerico } alt="lupa" /> */}
+          <img src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } alt="lupa" />
         </button>
         <h3 data-testid="recipe-category">{ data.strAlcoholic }</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}

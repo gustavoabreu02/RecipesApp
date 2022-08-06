@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+import blackHeartIcon from '../images/blackHeartIcon.svg'; // import dos corações para lógica - cheio
+import whiteHeartIcon from '../images/whiteHeartIcon.svg'; // import dos corações para lógica - vazio
+
+const copy = require('clipboard-copy');
 
 class FoodsInProgress extends React.Component {
   constructor() {
     super();
     if (localStorage.getItem('ingredientsFoods') === null) {
       localStorage.setItem('ingredientsFoods', JSON.stringify({}));
+    }
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
   }
 
@@ -20,6 +25,8 @@ class FoodsInProgress extends React.Component {
     ingredientCheckbox: [],
     renderCheckbox: true,
     buttonFinish: {},
+    srcFavorite: false,
+    copied: false,
   }
 
   componentDidMount = async () => {
@@ -55,6 +62,14 @@ class FoodsInProgress extends React.Component {
           }));
         }
       });
+    const favorite = localStorage.getItem('favoriteRecipes');
+    JSON.parse(favorite).forEach((recipe) => {
+      if ([recipe.id].includes(location.pathname.split('/')[2])) {
+        this.setState({
+          srcFavorite: true,
+        });
+      }
+    });
   };
 
   handleChange = () => {
@@ -63,11 +78,19 @@ class FoodsInProgress extends React.Component {
     }));
   };
 
+  copy = (type, id) => {
+    copy(`http://localhost:3000/${type}/${id}`);
+    this.setState({
+      copied: true,
+    });
+  }
+
   render() {
     const ingredientsFoods = localStorage.getItem('ingredientsFoods');
     const { location } = this.props;
     const { data,
-      ingredientFeito, ingredientCheckbox, renderCheckbox, buttonFinish } = this.state;
+      ingredientFeito, copied,
+      ingredientCheckbox, renderCheckbox, buttonFinish, srcFavorite } = this.state;
     console.log(buttonFinish);
     return (
       <div>
@@ -83,16 +106,35 @@ class FoodsInProgress extends React.Component {
           data-testid="share-btn"
           type="button"
           src={ shareIcon }
+          onClick={ () => this.copy('foods', data.idMeal) }
         >
           <img src={ shareIcon } alt="lupa" />
         </button>
+        { copied ? (
+          <p>Link copied!</p>
+        ) : '' }
         <button
           data-testid="favorite-btn"
           type="button"
-          /*  src={ nomeGenerico }  *//* nome da função com o if ou ternário buscando os corações black e white */
-          /* onClick={ this.showInput } */
+          src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } /* nome da função com o if ou ternário buscando os corações black e white */
+          onClick={ () => {
+            this.setState({
+              srcFavorite: !srcFavorite,
+            });
+            const favRecipe = JSON
+              .parse(localStorage.getItem('favoriteRecipes'));
+            localStorage.setItem('favoriteRecipes', JSON.stringify([...favRecipe, {
+              id: data.idMeal,
+              type: 'food',
+              nationality: data.strArea,
+              category: data.strCategory,
+              alcoholicOrNot: '',
+              name: data.strMeal,
+              image: data.strMealThumb,
+            }]));
+          } }
         >
-          {/* <img src={ nomeGenerico } alt="lupa" /> */}
+          <img src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } alt="lupa" />
         </button>
         <h3 data-testid="recipe-category">{ data.strCategory }</h3>
         {/* o index é um link e estava entre {}, a verificação será feita pelo length do atributo */}

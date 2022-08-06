@@ -57,7 +57,6 @@ class DetailsDrinks extends React.Component {
         this.setState({ recomendações: recomendações.meals });
       });
     const favorite = localStorage.getItem('favoriteRecipes');
-    console.log(pathname.split('/')[2]);
     JSON.parse(favorite).forEach((recipe) => {
       if ([recipe.id].includes(pathname.split('/')[2])) {
         this.setState({
