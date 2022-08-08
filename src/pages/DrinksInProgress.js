@@ -48,7 +48,6 @@ class DrinksInProgress extends React.Component {
         .then((data) => this.setState({ data: data.drinks[0] }));
     }
     const { data } = this.state;
-    console.log(data);
     Object.keys(data).filter((recipe) => recipe.includes('strIngredient'))
       .forEach((recipe) => {
         if (`${data[recipe]}` !== 'null' && `${data[recipe]}` !== '') {
@@ -83,7 +82,6 @@ class DrinksInProgress extends React.Component {
       ingredientCheckbox, renderCheckbox, buttonFinish, srcFavorite } = this.state;
     const ingredientsDrinks = localStorage.getItem('ingredientsDrinks');
     const { location } = this.props;
-    console.log(Object.values(buttonFinish));
     return (
       <div>
         <img

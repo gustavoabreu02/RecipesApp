@@ -84,6 +84,8 @@ class DetailsDrinks extends React.Component {
   }
 
   render() {
+    const doneRecipes = localStorage.getItem('doneRecipes');
+    console.log(JSON.parse(doneRecipes));
     const number = 5;
     const { data } = this.props;
     const { recomendações, buttonFavorite, copied, srcFavorite } = this.state;
@@ -197,17 +199,21 @@ class DetailsDrinks extends React.Component {
               data-testid="start-recipe-btn"
               type="button"
               onClick={ async () => {
-                localStorage.setItem('doneRecipes', JSON.stringify([{
-                  id: data.idDrink,
-                  type: 'Drink',
-                  nationality: data.strArea,
-                  category: data.strCategory,
-                  alcoholicOrNot: data.strAlcoholic,
-                  name: data.strDrink,
-                  image: data.strDrinkThumb,
-                  doneDate: new Date(),
-                  tags: [data.strTags],
-                }]));
+                const arrayDoneRecipes = [
+                  ...JSON.parse(doneRecipes),
+                  {
+                    id: data.idDrink,
+                    type: 'Drink',
+                    nationality: data.strArea,
+                    category: data.strCategory,
+                    alcoholicOrNot: data.strAlcoholic,
+                    name: data.strDrink,
+                    image: data.strDrinkThumb,
+                    doneDate: new Date(),
+                    tags: [data.strTags],
+                  },
+                ];
+                localStorage.setItem('doneRecipes', JSON.stringify(arrayDoneRecipes));
                 const driksStorage = JSON
                   .parse(localStorage.getItem('inProgressRecipes'));
                 driksStorage.cocktails[data.idDrink] = Object.entries(data)

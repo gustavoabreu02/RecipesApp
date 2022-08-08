@@ -49,7 +49,6 @@ class FoodsInProgress extends React.Component {
         .then((data) => this.setState({ data: data.drinks[0] }));
     }
     const { data } = this.state;
-    console.log(data);
     Object.keys(data).filter((recipe) => recipe.includes('strIngredient'))
       .forEach((recipe) => {
         if (`${data[recipe]}` !== 'null' && `${data[recipe]}` !== '') {
@@ -91,7 +90,6 @@ class FoodsInProgress extends React.Component {
     const { data,
       ingredientFeito, copied,
       ingredientCheckbox, renderCheckbox, buttonFinish, srcFavorite } = this.state;
-    console.log(buttonFinish);
     return (
       <div>
         <img
