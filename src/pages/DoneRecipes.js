@@ -9,7 +9,7 @@ const copy = require('clipboard-copy');
 class DoneRecipes extends React.Component {
   state = {
     copied: false,
-    data: JSON.parse(localStorage.getItem('doneRecipes')),
+    data: JSON.parse(localStorage.getItem('doneRecipes')) || [],
   }
 
   copy = (type, id) => {
@@ -26,7 +26,7 @@ class DoneRecipes extends React.Component {
     console.log(data);
     return (
       <div>
-        <Header title="Done Recipes" showIcon="a" />
+        <Header title="Done Recipes" />
         <button
           data-testid="filter-by-all-btn"
           type="button"
