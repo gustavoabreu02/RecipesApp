@@ -233,3 +233,8 @@
   text-decoration: none;
   width: 150px;
 }
+
+.imgDoneRecipes {
+  border-radius: 10px;
+  width: 40%;
+}

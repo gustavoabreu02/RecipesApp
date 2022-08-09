@@ -32,7 +32,6 @@ class DetailsFoods extends React.Component {
 
   state = {
     recomendações: [],
-    buttonFavorite: true,
     copied: false,
     srcFavorite: false,
     /* favoriteRecipe: false, */
@@ -45,16 +44,6 @@ class DetailsFoods extends React.Component {
   componentDidMount = () => {
     const history = createBrowserHistory();
     const { location: { pathname } } = history;
-    const { data } = this.props;
-    const recipeFavorite = localStorage.getItem('doneRecipes');
-    if (
-      JSON.parse(recipeFavorite)
-        .some((recipe) => recipe.id === data.idMeal) === true
-    ) {
-      this.setState({
-        buttonFavorite: false,
-      });
-    }
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((recomendações) => this.setState({ recomendações: recomendações.drinks }));
@@ -87,10 +76,10 @@ class DetailsFoods extends React.Component {
 
   render() {
     const doneRecipes = localStorage.getItem('doneRecipes');
-    console.log(JSON.parse(doneRecipes));
+    const recipeFavorite = localStorage.getItem('doneRecipes');
     const number = 5;
     const { data } = this.props;
-    const { recomendações, buttonFavorite, copied, srcFavorite } = this.state;
+    const { recomendações, copied, srcFavorite } = this.state;
     const history = createBrowserHistory();
     const { location: { pathname } } = history;
 
@@ -131,7 +120,7 @@ class DetailsFoods extends React.Component {
           src={ srcFavorite ? blackHeartIcon : whiteHeartIcon } /* nome da função com o if ou ternário buscando os corações black e white */
           onClick={ () => {
             this.setState({
-              srcFavorite: true,
+              srcFavorite: !srcFavorite,
             });
             const favRecipe = JSON
               .parse(localStorage.getItem('favoriteRecipes'));
@@ -196,7 +185,7 @@ class DetailsFoods extends React.Component {
               </div>
             )) }
         </div>
-        { buttonFavorite && (
+        { !JSON.parse(recipeFavorite).some((recipe) => recipe.id === data.idMeal) && (
           <Link to={ `${pathname}/in-progress` }>
             <button
               className="startRecipeBtn"

@@ -59,6 +59,7 @@ class DoneRecipes extends React.Component {
             <div key={ i }>
               <input
                 type="image"
+                className="imgDoneRecipes"
                 src={ recipe.image }
                 alt={ recipe.name }
                 onClick={ () => {
