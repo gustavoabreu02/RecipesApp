@@ -48,8 +48,8 @@ O arquivo principal da aplicação é o `App.js`. Nele, as rotas da aplicação 
 
 Para rodar o projeto, é necessário ter o Node.js instalado na máquina. Após isso, siga os seguintes passos:
 
-1. Clone este repositório em sua máquina: `git clone https://github.com/seu-usuario/nome-do-repositorio.git`
-2. Acesse a pasta do projeto: `cd nome-do-repositorio`
+1. Clone este repositório em sua máquina: `git clone https://github.com/gustavoabreu02/RecipesApp.git`
+2. Acesse a pasta do projeto: `cd RecipesApp`
 3. Instale as dependências do projeto: `npm install`
 4. Inicie a aplicação: `npm start`
 5. Acesse o endereço `http://localhost:3000` em seu navegador
